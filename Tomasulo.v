@@ -30,8 +30,8 @@ reg[15:0] ls_queue[0:3][0:2]; //Each index should be 16 bits since we wil be sto
 reg[15:0] regbank[0:15];
 reg[15:0] ROB[0:7][0:2];  //Each index should be 16 bits since we wil be storing the data
 initial begin
-  add_array[2][3] = 2'b11;
-  add_count = 2'b11;
+  add_array[2][3] = 2'b00;
+  add_count = 2'b00;
   $display("value: %b",add_array[2][3]);
 end
 
