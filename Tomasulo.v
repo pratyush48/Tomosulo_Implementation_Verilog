@@ -30,12 +30,12 @@ reg[3:0] add_array[0:2][0:5]; //RS add and sub
 reg[3:0] mul_array[0:2][0:5]; //RS mul_array
 reg[4:0] bch_array[0:1][0:2]; //RS branches
 reg[15:0] ls_queue[0:3][0:2]; //Each index should be 16 bits since we wil be storing the data
-reg[15:0] regbank[0:15];
+reg[15:0] regbank[0:15][1:0]; //First column is actual value and second column is ROB
 reg[15:0] ROB[0:7][0:2];  //Each index should be 16 bits since we wil be storing the data
 initial begin
-  add_array[2][3] = 2'b00;
-  add_count = 2'b00;
-  $display("value: %b",add_array[2][3]);
+  // add_array[2][3] = 2'b00;
+  // add_count = 2'b00;
+  // $display("value: %b",add_array[2][3]);
 end
 
 endmodule
