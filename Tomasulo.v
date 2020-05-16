@@ -20,7 +20,7 @@
 // beq = 0110
 // bneq = 0111
 //Ins format = func,rs1,rs2,rd
-//for branches, imm[7:0] = rd
+//for branches, imm[3:0] = rd
 //for ld,store, func,main_addr,rd
 
 module tomasulo;
@@ -32,6 +32,7 @@ reg[4:0] bch_array[0:1][0:2]; //RS branches
 reg[15:0] ls_queue[0:3][0:2]; //Each index should be 16 bits since we wil be storing the data
 reg[15:0] regbank[0:15][1:0]; //First column is actual value and second column is ROB
 reg[15:0] ROB[0:7][0:2];  //Each index should be 16 bits since we wil be storing the data
+reg[7:0] memory[0:255]; //Memory
 initial begin
   // add_array[2][3] = 2'b00;
   // add_count = 2'b00;
