@@ -15,14 +15,14 @@ begin
     if(tomasulo.regbank[rs1][1] < 8)
     begin
         rs1_b = 0;
-        rs1 = tomasulo.regbank[rs1][1];  
+        rs1 = tomasulo.regbank[rs1][1];
     end
-    else 
+    else
         rs1_b = 1;
     if(tomasulo.regbank[rs2][1] < 8)
     begin
         rs2_b = 0;
-        rs2 = tomasulo.regbank[rs2][1];  
+        rs2 = tomasulo.regbank[rs2][1];
     end
     else
         rs2_b = 1;
@@ -34,24 +34,24 @@ begin
             begin
                 Rstation_append rs(rs1_b,rs2_b,rs1,rs2,rob_ind,func,clk2,rd)
                 tomasulo.ROB[tomasulo.tail_p][0] <= func;
-                tomasulo.ROB[tomasulo.tail_p][1] <= rd;    
-                tomasulo.regbank[rd][1] <= tomasulo.tail_p;            
+                tomasulo.ROB[tomasulo.tail_p][1] <= rd;
+                tomasulo.regbank[rd][1] <= tomasulo.tail_p;
                 tomasulo.tail_p <= 0;
             end
             else if(tomasulo.mul_count < 3)
             begin
                 Rstation_append rs(rs1_b,rs2_b,rs1,rs2,rob_ind,func,clk2,rd)
                 tomasulo.ROB[tomasulo.tail_p][0] <= func;
-                tomasulo.ROB[tomasulo.tail_p][1] <= rd;    
-                tomasulo.regbank[rd][1] <= tomasulo.tail_p;                             
+                tomasulo.ROB[tomasulo.tail_p][1] <= rd;
+                tomasulo.regbank[rd][1] <= tomasulo.tail_p;
                 tomasulo.tail_p <= 0;
             end
             else if(tomasulo.bch_count < 3)
             begin
                 Rstation_append rs(rs1_b,rs2_b,rs1,rs2,rob_ind,func,clk2,rd)
                 tomasulo.ROB[tomasulo.tail_p][0] <= func;
-                tomasulo.ROB[tomasulo.tail_p][1] <= rd; 
-                tomasulo.regbank[rd][1] <= tomasulo.tail_p;                                
+                tomasulo.ROB[tomasulo.tail_p][1] <= rd;
+                tomasulo.regbank[rd][1] <= tomasulo.tail_p;
                 tomasulo.tail_p <= 0;
             end
             else
@@ -66,8 +66,8 @@ begin
             begin
                 Rstation_append rs(rs1_b,rs2_b,rs1,rs2,rob_ind,func,clk2,rd)
                 tomasulo.ROB[tomasulo.tail_p][0] <= func;
-                tomasulo.ROB[tomasulo.tail_p][1] <= rd; 
-                tomasulo.regbank[rd][1] <= tomasulo.tail_p;                                
+                tomasulo.ROB[tomasulo.tail_p][1] <= rd;
+                tomasulo.regbank[rd][1] <= tomasulo.tail_p;
                 tomasulo.tail_p <= 0;
             end
             else if(tomasulo.mul_count < 3)
@@ -75,15 +75,15 @@ begin
                 Rstation_append rs(rs1_b,rs2_b,rs1,rs2,rob_ind,func,clk2,rd)
                 tomasulo.ROB[tomasulo.tail_p][0] <= func;
                 tomasulo.ROB[tomasulo.tail_p][1] <= rd;
-                tomasulo.regbank[rd][1] <= tomasulo.tail_p;                                 
+                tomasulo.regbank[rd][1] <= tomasulo.tail_p;
                 tomasulo.tail_p <= 0;
             end
             else if(tomasulo.bch_count < 3)
             begin
                 Rstation_append rs(rs1_b,rs2_b,rs1,rs2,rob_ind,func,clk2,rd)
                 tomasulo.ROB[tomasulo.tail_p][0] <= func;
-                tomasulo.ROB[tomasulo.tail_p][1] <= rd; 
-                tomasulo.regbank[rd][1] <= tomasulo.tail_p;                                
+                tomasulo.ROB[tomasulo.tail_p][1] <= rd;
+                tomasulo.regbank[rd][1] <= tomasulo.tail_p;
                 tomasulo.tail_p <= 0;
             end
             else
@@ -96,23 +96,23 @@ begin
                 Rstation_append rs(rs1_b,rs2_b,rs1,rs2,rob_ind,func,clk2,rd)
                 tomasulo.ROB[tomasulo.tail_p][0] <= func;
                 tomasulo.ROB[tomasulo.tail_p][1] <= rd;
-                tomasulo.regbank[rd][1] <= tomasulo.tail_p;                                 
+                tomasulo.regbank[rd][1] <= tomasulo.tail_p;
                 tomasulo.tail_p <= tomasulo.tail_p + 1;
             end
             else if(tomasulo.mul_count < 3)
             begin
                 Rstation_append rs(rs1_b,rs2_b,rs1,rs2,rob_ind,func,clk2,rd)
                 tomasulo.ROB[tomasulo.tail_p][0] <= func;
-                tomasulo.ROB[tomasulo.tail_p][1] <= rd; 
-                tomasulo.regbank[rd][1] <= tomasulo.tail_p;                                
+                tomasulo.ROB[tomasulo.tail_p][1] <= rd;
+                tomasulo.regbank[rd][1] <= tomasulo.tail_p;
                 tomasulo.tail_p <= tomasulo.tail_p + 1;
             end
             else if(tomasulo.bch_count < 3)
             begin
                 Rstation_append rs(rs1_b,rs2_b,rs1,rs2,rob_ind,func,clk2,rd)
                 tomasulo.ROB[tomasulo.tail_p][0] <= func;
-                tomasulo.ROB[tomasulo.tail_p][1] <= rd; 
-                tomasulo.regbank[rd][1] <= tomasulo.tail_p;                                
+                tomasulo.ROB[tomasulo.tail_p][1] <= rd;
+                tomasulo.regbank[rd][1] <= tomasulo.tail_p;
                 tomasulo.tail_p <= tomasulo.tail_p + 1;
             end
             else
