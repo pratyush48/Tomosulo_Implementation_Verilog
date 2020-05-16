@@ -1,12 +1,12 @@
 
-module Rstation_append(rs1_b,rs2_b,rs1,rs2,rob_ind,func,clk2,rd);
+module Rstation_append(rs1_b,rs2_b,rs1,rs2,rob_ind,func,clk1,clk2,rd);
 
 //These 2 bits are two check if the registers are available or not
 input rs1_b,rs2_b;
 input [3:0] rs1,rs2,func,rd;
 input [2:0] rob_ind;
 // input [7:0] addr;
-input clk2;
+input clk1,clk2;
 // output [15:0] out;
 
 //RS coulmns: func,rob_rs1,rs1,rob_rs2,rs2,rob
