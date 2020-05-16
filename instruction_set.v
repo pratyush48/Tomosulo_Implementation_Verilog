@@ -18,7 +18,7 @@ initial begin
     tomasulo.memory[5] = 16'b0001010110110101;
 end
 
-always@(posedge clk)
+always@(posedge clk1)
   begin
     num = PC;
     output_instruction = tomasulo.memory[num];  //Here we are assigning the instruction present in the memory.
