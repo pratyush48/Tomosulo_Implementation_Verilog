@@ -2,9 +2,9 @@
 
 module instruction_set(PC,clk1,output_instruction);
 
-input [31:0] PC;
-output reg [31:0] output_instruction;
+input [3:0] PC;
 input clk1;
+output reg [15:0] output_instruction;
 integer num;
 
 //These are the instructions that we use for matrix multiplication.

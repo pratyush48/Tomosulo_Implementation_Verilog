@@ -5,7 +5,7 @@ reg[3:0] pc;
 reg clk1,clk2;
 integer  k;
 
- tomasulo uut(
+ tomasulo tomas(
   .pc(pc),
   .clk1(clk1),
   .clk2(clk2)
@@ -25,13 +25,13 @@ end
 //Initialising all the registers
 initial begin
   for(k = 0;k < 16; k++)
-      tomasulo.regbank[k] = k;
+      tomas.regbank[k] = k;
 end
 
 initial
   repeat(8)
     begin
-      #20 PC += 4'b1;
+      #20 pc += 4'b1;
     end
 
 endmodule
