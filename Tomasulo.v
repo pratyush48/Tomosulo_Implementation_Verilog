@@ -18,12 +18,14 @@ module tomasulo(pc,clk1,clk2);
 
 instruction_set k1(pc,clk1,inst);
 
-initial begin
+always @(pc)
+  begin
   #10;
   func = inst[15:12];
   rs1 = inst[11:8];
   rs2 = inst[7:4];
   rd = inst[3:0];
+  $display("values of pc = %b",pc);
   $display("values of func = %b",func);
   $display("values of rs1 = %b",rs1);
   $display("values of rs2 = %b",rs2);

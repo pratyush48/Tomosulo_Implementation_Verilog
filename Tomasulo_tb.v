@@ -15,9 +15,9 @@ initial begin
   $dumpfile("tomasulo_tb.vcd");
   $dumpvars(0,tomasulo_tb);
   clk1 = 0; clk2 = 0; pc = 0;
-  repeat(20)
+  repeat(6)
     begin
-      #5 clk1 = 1; #5 clk2 = 0;
+      #5 clk1 = 1; #5 clk1 = 0;
       #5 clk2 = 1; #5 clk2 = 0;
     end
 end
@@ -28,10 +28,12 @@ initial begin
       tomas.regbank[k] = k;
 end
 
-initial
-  repeat(8)
-    begin
-      #20 pc += 4'b1;
-    end
+always @(posedge clk1)
+    pc += 4'b1;
+// initial
+//   repeat(6)
+//     begin
+//       #20 pc = pc + 4'b1;
+//     end
 
 endmodule
