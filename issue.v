@@ -3,9 +3,9 @@ module issue (Zout, rs1, rs2, rd, func, addr, clk1, clk2);
 input [3:0] rs1, rs2, rd, func;
 input [7:0] addr;
 input clk1, clk2;
-reg [15:0] Zout;
-wire count;
-
+output reg [15:0] Zout;
+reg count;
+reg [2:0] rob_ind;
 wire rs1_b,rs2_b;
 always @(posedge clk1)
 begin
@@ -29,33 +29,12 @@ begin
         if (tomasulo.tail_p == 7)
         begin
             if(tomasulo.add_count < 3)
-            begin
                 count =  1;
-                //Rstation_append rs(rs1_b,rs2_b,rs1,rs2,rob_ind,func,clk1,clk2,rd);
-            //Rstation_append rs(rs1_b,rs2_b,rs1,rs2,rob_ind,func,clk1,clk2,rd);
-            //tomasulo.ROB[tomasulo.tail_p][0] <= func;
-            //tomasulo.ROB[tomasulo.tail_p][1] <= rd;
-            //tomasulo.tail_p <= tomasulo.tail_p + 1;
-            end
             else if(tomasulo.mul_count < 3)
-            begin
                 count = 1;
-                //Rstation_append rs(rs1_b,rs2_b,rs1,rs2,rob_ind,func,clk1,clk2,rd);
-            //Rstation_append rs(rs1_b,rs2_b,rs1,rs2,rob_ind,func,clk1,clk2,rd);
-            //tomasulo.ROB[tomasulo.tail_p][0] <= func;
-            //tomasulo.ROB[tomasulo.tail_p][1] <= rd;
-            //tomasulo.tail_p <= tomasulo.tail_p + 1;
-            end
             else if(tomasulo.bch_count < 3)
-            begin
                 count = 1;
-                //Rstation_append rs(rs1_b,rs2_b,rs1,rs2,rob_ind,func,clk1,clk2,rd);
-            //Rstation_append rs(rs1_b,rs2_b,rs1,rs2,rob_ind,func,clk1,clk2,rd);
-            //tomasulo.ROB[tomasulo.tail_p][0] <= func;
-            //tomasulo.ROB[tomasulo.tail_p][1] <= rd;
-            //tomasulo.tail_p <= tomasulo.tail_p + 1;
-            end
-            else
+            // else
                 //stall
         end
     end
@@ -64,86 +43,32 @@ begin
         if (tomasulo.tail_p == 7)
         begin
             if(tomasulo.add_count < 3)
-            begin
                 count = 1;
-                //Rstation_append rs(rs1_b,rs2_b,rs1,rs2,rob_ind,func,clk1,clk2,rd);
-            //Rstation_append rs(rs1_b,rs2_b,rs1,rs2,rob_ind,func,clk1,clk2,rd);
-            //tomasulo.ROB[tomasulo.tail_p][0] <= func;
-            //tomasulo.ROB[tomasulo.tail_p][1] <= rd;
-            //tomasulo.tail_p <= tomasulo.tail_p + 1;
-            end
             else if(tomasulo.mul_count < 3)
-            begin
                 count = 1;
-                //Rstation_append rs(rs1_b,rs2_b,rs1,rs2,rob_ind,func,clk1,clk2,rd);
-            //Rstation_append rs(rs1_b,rs2_b,rs1,rs2,rob_ind,func,clk1,clk2,rd);
-            //tomasulo.ROB[tomasulo.tail_p][0] <= func;
-            //tomasulo.ROB[tomasulo.tail_p][1] <= rd;
-            //tomasulo.tail_p <= tomasulo.tail_p + 1;
-            end
             else if(tomasulo.bch_count < 3)
-            begin
                 count = 1;
-                //Rstation_append rs(rs1_b,rs2_b,rs1,rs2,rob_ind,func,clk1,clk2,rd);
-            //Rstation_append rs(rs1_b,rs2_b,rs1,rs2,rob_ind,func,clk1,clk2,rd);
-            //tomasulo.ROB[tomasulo.tail_p][0] <= func;
-            //tomasulo.ROB[tomasulo.tail_p][1] <= rd;
-            //tomasulo.tail_p <= tomasulo.tail_p + 1;
-            end
-            else
+            // else
                 //stall
         end
         else
         begin
             if(tomasulo.add_count < 3)
-            begin
                 count = 1;
-                //Rstation_append rs(rs1_b,rs2_b,rs1,rs2,rob_ind,func,clk1,clk2,rd);
-            //Rstation_append rs(rs1_b,rs2_b,rs1,rs2,rob_ind,func,clk1,clk2,rd);
-            //tomasulo.ROB[tomasulo.tail_p][0] <= func;
-            //tomasulo.ROB[tomasulo.tail_p][1] <= rd;
-            //tomasulo.tail_p <= tomasulo.tail_p + 1;
-            end
             else if(tomasulo.mul_count < 3)
-            begin
                 count = 1;
-                //Rstation_append rs(rs1_b,rs2_b,rs1,rs2,rob_ind,func,clk1,clk2,rd);
-            //Rstation_append rs(rs1_b,rs2_b,rs1,rs2,rob_ind,func,clk1,clk2,rd);
-            //tomasulo.ROB[tomasulo.tail_p][0] <= func;
-            //tomasulo.ROB[tomasulo.tail_p][1] <= rd;
-            //tomasulo.tail_p <= tomasulo.tail_p + 1;
-            end
             else if(tomasulo.bch_count < 3)
-            begin
                 count = 1;
-                //Rstation_append rs(rs1_b,rs2_b,rs1,rs2,rob_ind,func,clk1,clk2,rd);
-            //Rstation_append rs(rs1_b,rs2_b,rs1,rs2,rob_ind,func,clk1,clk2,rd);
-            //tomasulo.ROB[tomasulo.tail_p][0] <= func;
-            //tomasulo.ROB[tomasulo.tail_p][1] <= rd;
-            //tomasulo.tail_p <= tomasulo.tail_p + 1;
-            end
-            else
+            // else
                 //stall
         end
     end
     else
     begin
         if(tomasulo.add_count < 3)
-        begin
             count = 1;
-            //Rstation_append rs(rs1_b,rs2_b,rs1,rs2,rob_ind,func,clk1,clk2,rd);
-            //tomasulo.ROB[tomasulo.tail_p][0] <= func;
-            //tomasulo.ROB[tomasulo.tail_p][1] <= rd;
-            //tomasulo.tail_p <= tomasulo.tail_p + 1;
-        end
         else if(tomasulo.mul_count < 3)
-        begin
             count = 1;
-            //Rstation_append rs(rs1_b,rs2_b,rs1,rs2,rob_ind,func,clk1,clk2,rd);
-            //tomasulo.ROB[tomasulo.tail_p][0] <= func;
-            //tomasulo.ROB[tomasulo.tail_p][1] <= rd;
-            //tomasulo.tail_p <= tomasulo.tail_p + 1;
-        end
         else if(tomasulo.bch_count < 3)
         begin
             count = 1;
@@ -152,14 +77,15 @@ begin
             //tomasulo.ROB[tomasulo.tail_p][1] <= rd;
             //tomasulo.tail_p <= tomasulo.tail_p + 1;
         end
-        else
+        // else
             //stall
     end
     if (count == 1)
     begin
         tomasulo.ROB[tomasulo.tail_p][0] <= func;
         tomasulo.ROB[tomasulo.tail_p][1] <= rd;
-        tomasulo.tail_p <= tomasulo.tail_p + 1;    
+        tomasulo.tail_p <= tomasulo.tail_p + 1;
+        rob_ind = tomasulo.tail_p;
     end
 end
 Rstation_append rs(rs1_b,rs2_b,rs1,rs2,rob_ind,func,clk1,clk2,rd,count);

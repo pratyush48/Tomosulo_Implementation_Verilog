@@ -25,7 +25,7 @@ end
 //Initialising all the registers
 initial begin
   for(k = 0;k < 16; k++)
-      tomas.regbank[k] = k;
+      tomas.regbank[k][0] = k;
 end
 
 always @(posedge clk1)

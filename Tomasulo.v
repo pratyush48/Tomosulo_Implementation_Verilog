@@ -11,10 +11,17 @@ module tomasulo(pc,clk1,clk2);
   reg [3:0] mul_array[0:2][0:5]; //RS mul_array
   reg [4:0] bch_array[0:1][0:2]; //RS branches
   reg [15:0] ls_queue[0:3][0:2]; //Each index should be 16 bits since we wil be storing the data
-  reg [15:0] regbank[0:15]; //First column is actual value and second column is ROB
+  reg [15:0] regbank[0:15][1:0]; //First column is actual value and second column is ROB
   reg [15:0] ROB[0:7][0:2];  //Each index should be 16 bits since we will be storing the data
   reg [15:0] memory[0:255]; //Memory
 
+initial begin
+  add_count = 2'b0;
+  mul_count = 2'b0;
+  bch_count = 2'b0;
+  head_p = 3'b0;
+  tail_p = 3'b0;
+end
 
 instruction_set k1(pc,clk1,inst);
 
