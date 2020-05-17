@@ -1,7 +1,7 @@
-module issue (Zout, rs1, rs2, rd, func, addr, clk1, clk2);
+module issue (rs1, rs2, rd, func,clk1, clk2);
 
 input [3:0] rs1, rs2, rd, func;
-input [7:0] addr;
+wire [3:0] rs1_data,rs2_data;
 input clk1, clk2;
 output reg [15:0] Zout;
 integer index;
@@ -15,14 +15,14 @@ begin
     if(tomasulo.regbank[index][1] < 16'b1000)
     begin
         rs1_b = 0;
-        rs1 = tomasulo.regbank[index][1];
+        //rs1 = tomasulo.regbank[index][1];
     end
     else
         rs1_b = 1;
     if(tomasulo.regbank[rs2][1] < 16'b1000)
     begin
         rs2_b = 0;
-        rs2 = tomasulo.regbank[rs2][1];
+        //rs2 = tomasulo.regbank[rs2][1];
     end
     else
         rs2_b = 1;
