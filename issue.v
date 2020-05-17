@@ -2,12 +2,8 @@ module issue (Zout, rs1, rs2, rd, func, addr, clk1, clk2);
 
 input [3:0] rs1, rs2, rd, func;
 input [7:0] addr;
-input write, clk1, clk2;
-output [15:0] Zout;
-
-reg [15:0] L12_A, L12_B, L12_Z, L34_Z;
-reg [3:0] L12_rd, L12_func, L23_rd;
-reg [7:0] L12_addr, L23_addr, L34_addr;
+input clk1, clk2;
+reg [15:0] Zout;
 
 wire rs1_b,rs2_b;
 always @(posedge clk1)
@@ -147,3 +143,4 @@ begin
     end
 end
 assign Zout = L34_Z;
+endmodule
