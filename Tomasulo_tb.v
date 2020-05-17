@@ -28,6 +28,13 @@ initial begin
       tomas.regbank[k][0] = k;
   for(k = 0;k < 8;k++)
       tomas.ROB[k][1] = 8;
+  tomas.add_count = 0;
+  tomas.mul_count = 2'b0;
+  tomas.bch_count = 2'b0;
+  tomas.head_p = 3'b0;
+  tomas.tail_p = 3'b0;
+  tomas.pr3_addexec = 0;
+  tomas.pr3_mulexec = 0;
 end
 
 always @(posedge clk2)
