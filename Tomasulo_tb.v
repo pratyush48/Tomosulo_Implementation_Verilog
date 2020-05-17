@@ -4,10 +4,11 @@ module tomasulo_tb;
 reg[3:0] pc;
 reg clk1,clk2;
 integer  k;
-tomasulo uut(
+
+ tomasulo uut(
   .pc(pc),
   .clk1(clk1),
-  .clk2(clk2),
+  .clk2(clk2)
   );
 
 initial begin
@@ -22,12 +23,15 @@ initial begin
 end
 
 //Initialising all the registers
-initial
+initial begin
   for(k = 0;k < 16; k++)
-    tomasulo.regbank[k] = k;
+      tomasulo.regbank[k] = k;
+end
 
 initial
   repeat(8)
     begin
       #20 PC += 4'b1;
     end
+
+endmodule

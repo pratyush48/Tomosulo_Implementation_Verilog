@@ -40,11 +40,13 @@ reg[15:0] regbank[0:15][1:0]; //First column is actual value and second column i
 reg[15:0] ROB[0:7][0:2];  //Each index should be 16 bits since we wil be storing the data
 reg[15:0] memory[0:255]; //Memory
 
-instructionset k1(pc,clk1,inst);
+instruction_set k1(pc,clk1,inst);
 
-func = inst[15:12];
-rs1 = inst[11:8];
-rs2 = inst[7:4];
-rd = inst[3:0];
+initial begin
+  func = inst[15:12];
+  rs1 = inst[11:8];
+  rs2 = inst[7:4];
+  rd = inst[3:0];
+end
 
 endmodule

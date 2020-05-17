@@ -1,6 +1,6 @@
 //This is the instruction set which takes the PC number and gives the instruction in that memory.
 
-module instructionset(PC,clk1,output_instruction);
+module instruction_set(PC,clk1,output_instruction);
 
 input [31:0] PC;
 output reg [31:0] output_instruction;
