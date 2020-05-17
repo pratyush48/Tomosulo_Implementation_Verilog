@@ -5,7 +5,9 @@ module tomasulo(pc,clk1,clk2);
 
   wire [15:0] inst; //This is for getting instruction from ins set
   reg [3:0] rs1,rs2,func,rd;
-  reg [1:0] add_count,mul_count,bch_count;
+  reg [1:0] mul_count,bch_count;
+  reg [15:0] out;
+  integer add_count;
   reg [2:0] head_p,tail_p;
   reg [3:0] add_array[0:2][0:5]; //RS add and sub
   reg [3:0] mul_array[0:2][0:5]; //RS mul_array
@@ -16,7 +18,7 @@ module tomasulo(pc,clk1,clk2);
   reg [15:0] memory[0:255]; //Memory
 
 initial begin
-  add_count = 2'b0;
+  add_count = 0;
   mul_count = 2'b0;
   bch_count = 2'b0;
   head_p = 3'b0;
@@ -38,6 +40,8 @@ always @(pc)
   $display("values of rs2 = %b",rs2);
   $display("values of rd = %b",rd);
 end
+
+issue is1(out, rs1, rs2, rd, func, addr, clk1, clk2);
 
 endmodule
 

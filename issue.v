@@ -4,20 +4,22 @@ input [3:0] rs1, rs2, rd, func;
 input [7:0] addr;
 input clk1, clk2;
 output reg [15:0] Zout;
+integer index;
 reg count;
 reg [2:0] rob_ind;
-wire rs1_b,rs2_b;
+reg rs1_b,rs2_b;
 always @(posedge clk1)
 begin
+    index = rs1;
     count = 0;
-    if(tomasulo.regbank[rs1][1] < 8)
+    if(tomasulo.regbank[index][1] < 16'b1000)
     begin
         rs1_b = 0;
-        rs1 = tomasulo.regbank[rs1][1];
+        rs1 = tomasulo.regbank[index][1];
     end
     else
         rs1_b = 1;
-    if(tomasulo.regbank[rs2][1] < 8)
+    if(tomasulo.regbank[rs2][1] < 16'b1000)
     begin
         rs2_b = 0;
         rs2 = tomasulo.regbank[rs2][1];
