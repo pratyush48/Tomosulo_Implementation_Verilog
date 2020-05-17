@@ -1,0 +1,162 @@
+$date
+	Sun May 17 12:30:35 2020
+$end
+$version
+	Icarus Verilog
+$end
+$timescale
+	1s
+$end
+$scope module tomasulo_tb $end
+$var reg 1 ! clk1 $end
+$var reg 1 " clk2 $end
+$var reg 4 # pc [3:0] $end
+$var integer 32 $ k [31:0] $end
+$scope module tomas $end
+$var wire 1 ! clk1 $end
+$var wire 1 " clk2 $end
+$var wire 4 % pc [3:0] $end
+$var wire 16 & inst [15:0] $end
+$var reg 4 ' func [3:0] $end
+$var reg 4 ( rd [3:0] $end
+$var reg 4 ) rs1 [3:0] $end
+$var reg 4 * rs2 [3:0] $end
+$scope module k1 $end
+$var wire 4 + PC [3:0] $end
+$var wire 1 ! clk1 $end
+$var reg 16 , output_instruction [15:0] $end
+$var integer 32 - num [31:0] $end
+$upscope $end
+$upscope $end
+$upscope $end
+$enddefinitions $end
+#0
+$dumpvars
+bx -
+bx ,
+b0 +
+bx *
+bx )
+bx (
+bx '
+bx &
+b0 %
+b10000 $
+b0 #
+0"
+0!
+$end
+#5
+b10000100100011 &
+b10000100100011 ,
+b0 -
+1!
+#10
+b11 (
+b10 *
+b1 )
+b10 '
+#15
+1"
+#20
+0"
+b1 #
+b1 %
+b1 +
+#35
+1"
+#40
+0"
+b10 #
+b10 %
+b10 +
+#55
+1"
+#60
+0"
+b11 #
+b11 %
+b11 +
+#75
+1"
+#80
+0"
+b100 #
+b100 %
+b100 +
+#95
+1"
+#100
+0"
+b101 #
+b101 %
+b101 +
+#115
+1"
+#120
+0"
+b110 #
+b110 %
+b110 +
+#135
+1"
+#140
+0"
+b111 #
+b111 %
+b111 +
+#155
+1"
+#160
+0"
+b1000 #
+b1000 %
+b1000 +
+#175
+1"
+#180
+0"
+#195
+1"
+#200
+0"
+#215
+1"
+#220
+0"
+#235
+1"
+#240
+0"
+#255
+1"
+#260
+0"
+#275
+1"
+#280
+0"
+#295
+1"
+#300
+0"
+#315
+1"
+#320
+0"
+#335
+1"
+#340
+0"
+#355
+1"
+#360
+0"
+#375
+1"
+#380
+0"
+#395
+1"
+#400
+0"
