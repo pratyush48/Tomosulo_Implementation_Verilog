@@ -7,7 +7,7 @@ input[3:0] rs1,rs2,func,rd;
 input [2:0] rob_ind;
 // input [7:0] addr;
 input clk1,clk2;
-integer temp,temp2,temp3;
+integer temp,temp2,temp3,i;
 reg exec_b;
 // output [15:0] out;
 
@@ -77,7 +77,7 @@ always @(posedge clk2)
   for(temp3 = 0; temp3 < 3; temp3++)
   begin
   // $display("rs1b = %b rs2_b = %b,mul_exec = %b",tomasulo.mul_array[temp3][6],tomasulo.mul_array[temp3][7],tomasulo.pr3_mulexec);
-    $display("reg_value = %b",tomasulo.regbank[tomasulo.add_array[temp3][3]][0]);
+    //$display("reg_value = %b",tomasulo.regbank[tomasulo.add_array[temp3][3]][0]);
     if((tomasulo.mul_array[temp3][6] == 3'b1) && (tomasulo.mul_array[temp3][7] == 3'b1) && (tomasulo.pr3_mulexec == 0))
     begin
       tomasulo.pr3_rs1data <= tomasulo.regbank[tomasulo.add_array[temp3][3]][0];
@@ -99,5 +99,9 @@ always @(posedge clk2)
 
   end
   exec ex(tomasulo.pr3_rs1data,tomasulo.pr3_rs2data,tomasulo.pr3_func,tomasulo.pr3_rob_ind,clk1,tomasulo.pr3_rd,exec_b);
-
+// always@(posedge clk2)
+// begin
+// for(i = 0;i < 16;i++)
+//     $display("rob_val = %b",tomasulo.regbank[i][1]);
+// end
 endmodule

@@ -1,5 +1,5 @@
 $date
-	Mon May 18 00:49:07 2020
+	Mon May 18 02:06:11 2020
 $end
 $version
 	Icarus Verilog
@@ -62,36 +62,38 @@ $var wire 1 1 rs1_b $end
 $var wire 4 I rs2 [3:0] $end
 $var wire 1 3 rs2_b $end
 $var reg 1 J exec_b $end
-$var integer 32 K temp [31:0] $end
+$var integer 32 K i [31:0] $end
 $var integer 32 L temp2 [31:0] $end
+$var integer 32 M temp3 [31:0] $end
 $scope module ex $end
 $var wire 1 ! clk1 $end
 $var wire 1 J exec_b $end
-$var wire 4 M func [3:0] $end
-$var wire 4 N rd [3:0] $end
-$var wire 3 O rob_ind [2:0] $end
-$var wire 8 P rs1_data [7:0] $end
-$var wire 8 Q rs2_data [7:0] $end
-$var reg 16 R out1 [15:0] $end
-$var integer 32 S count_as [31:0] $end
-$var integer 32 T count_md [31:0] $end
+$var wire 4 N func [3:0] $end
+$var wire 4 O rd [3:0] $end
+$var wire 3 P rob_ind [2:0] $end
+$var wire 8 Q rs1_data [7:0] $end
+$var wire 8 R rs2_data [7:0] $end
+$var reg 16 S out1 [15:0] $end
+$var integer 32 T count_as [31:0] $end
+$var integer 32 U count_md [31:0] $end
 $upscope $end
 $upscope $end
 $upscope $end
 $scope module k1 $end
-$var wire 4 U PC [3:0] $end
+$var wire 4 V PC [3:0] $end
 $var wire 1 ! clk1 $end
-$var reg 16 V output_instruction [15:0] $end
-$var integer 32 W num [31:0] $end
+$var reg 16 W output_instruction [15:0] $end
+$var integer 32 X num [31:0] $end
 $upscope $end
 $upscope $end
 $upscope $end
 $enddefinitions $end
 #0
 $dumpvars
+bx X
 bx W
-bx V
-b0 U
+b0 V
+bx U
 bx T
 bx S
 bx R
@@ -156,8 +158,8 @@ b1 A
 b10 (
 b10 ?
 b10000100100011 &
-b10000100100011 V
-b0 W
+b10000100100011 W
+b0 X
 b0 /
 b0 G
 13
@@ -168,11 +170,13 @@ b0xxxx D
 #10
 0!
 #15
+b11 M
 b11 L
 0J
+b10000 K
 b1 #
 b1 %
-b1 U
+b1 V
 1"
 #20
 0"
@@ -200,15 +204,17 @@ b1 G
 1,
 b1 D
 b1101000101 &
-b1101000101 V
-b1 W
+b1101000101 W
+b1 X
 1!
 #30
 0!
 #35
 b10 #
 b10 %
-b10 U
+b10 V
+b10000 K
+b11 M
 b11 L
 1"
 #40
@@ -228,8 +234,8 @@ b110 B
 b10 *
 b10 A
 b1001100111 &
-b1001100111 V
-b10 W
+b1001100111 W
+b10 X
 b101 .
 b101 F
 b1 <
@@ -242,10 +248,20 @@ b11 D
 #50
 0!
 #55
+1J
+b101 7
+b101 O
+b0 5
+b0 N
+16
+b10 8
+b10 P
+b11 M
 b11 L
+b10000 K
 b11 #
 b11 %
-b11 U
+b11 V
 1"
 #60
 0"
@@ -269,17 +285,22 @@ b11 G
 11
 1,
 b10 D
+b0 U
+b1 T
 b100010011010 &
-b100010011010 V
-b11 W
+b100010011010 W
+b11 X
 1!
 #70
 0!
 #75
 b100 #
 b100 %
-b100 U
+b100 V
+b10000 K
+b11 M
 b11 L
+0J
 1"
 #80
 0"
@@ -289,17 +310,17 @@ b1001 I
 b1000 0
 b1000 H
 b101 ;
-b1011 )
-b1011 @
-b1010 +
-b1010 B
-b111 *
-b111 A
-b10 (
-b10 ?
-b10011110101011 &
-b10011110101011 V
-b100 W
+bx )
+bx @
+bx +
+bx B
+bx *
+bx A
+bx (
+bx ?
+bx &
+bx W
+b100 X
 b1010 .
 b1010 F
 b11 <
@@ -311,49 +332,129 @@ b1000 D
 #90
 0!
 #95
+1J
+b100 8
+b100 P
+b11 :
+b11 R
+b10 9
+b10 Q
+b11 M
+14
+b1010 7
+b1010 O
 b11 L
+b10000 K
 b101 #
 b101 %
-b101 U
+b101 V
 1"
 #100
 0"
 #105
-b10 -
-b10 E
-b1010 2
-b1010 I
-b111 0
-b111 H
+bx -
+bx E
+bx 2
+bx I
+bx 0
+bx H
 b110 ;
-b101 )
-b101 @
-b1011 +
-b1011 B
-b101 *
-b101 A
-b1 (
-b1 ?
-b1011 .
-b1011 F
-b10 >
+bx .
+bx F
 b101 /
 b101 G
-03
-01
 1,
-b111 D
-b1010110110101 &
-b1010110110101 V
-b101 W
+b0xxxx D
+b1 T
+b101 X
 1!
 #110
 0!
 #115
 b110 #
 b110 %
-b110 U
+b110 V
+b10000 K
+b11 M
 b11 L
+0J
 1"
 #120
+0"
+#125
+b111 ;
+b101 S
+b110 X
+b110 /
+b110 G
+1,
+1!
+#130
+0!
+#135
+b11 M
+b11 L
+b10000 K
+b111 #
+b111 %
+b111 V
+1"
+#140
+0"
+#145
+b0 ;
+b111 /
+b111 G
+1,
+b111 X
+1!
+#150
+0!
+#155
+b1000 #
+b1000 %
+b1000 V
+b10000 K
+b11 M
+b11 L
+1"
+#160
+0"
+#165
+b1 ;
+b1000 X
+b0 /
+b0 G
+1,
+1!
+#170
+0!
+#175
+b11 M
+b11 L
+b10000 K
+b1001 #
+b1001 %
+b1001 V
+1"
+#180
+0"
+#185
+b10 ;
+b1 /
+b1 G
+1,
+b1001 X
+1!
+#190
+0!
+#195
+b1010 #
+b1010 %
+b1010 V
+b10000 K
+b11 M
+b11 L
+1"
+#200
 0"

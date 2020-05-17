@@ -7,7 +7,7 @@ input clk1,exec_b;
 integer count_as;
 integer count_md;
 reg[15:0] out1;
-always @(clk1)
+always @(posedge clk1)
 begin
     if (exec_b == 1)
     begin
