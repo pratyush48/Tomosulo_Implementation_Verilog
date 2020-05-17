@@ -37,11 +37,11 @@ always @(inst)
   pr1_rs1 = inst[11:8];
   pr1_rs2 = inst[7:4];
   pr1_rd = inst[3:0];
-  $display("values of pc = %b",pc);
-  $display("values of func = %b",pr1_func);
-  $display("values of rs1 = %b",pr1_rs1);
-  $display("values of rs2 = %b",pr1_rs2);
-  $display("values of rd = %b",pr1_rd);
+  // $display("values of pc = %b",pc);
+  // $display("values of func = %b",pr1_func);
+  // $display("values of rs1 = %b",pr1_rs1);
+  // $display("values of rs2 = %b",pr1_rs2);
+  // $display("values of rd = %b",pr1_rd);
 end
 
 // assign func = inst[15:12];

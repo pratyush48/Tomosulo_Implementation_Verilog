@@ -99,12 +99,13 @@ begin
     end
 end
 
-always @(posedge clk1)
-  begin
-  #10
-  $display("add_count = %d \t mul_count = %d",tomasulo.add_count,tomasulo.mul_count);
-  $display("input to RS func %b\t%b\t%b\t%b\t%b\t%b\t%b\t%b",tomasulo.pr2_rs1b,tomasulo.pr2_rs2b,tomasulo.pr2_rs1,tomasulo.pr2_rs2,tomasulo.pr2_rob_ind,tomasulo.pr2_func,clk1,clk2,tomasulo.pr2_rd,tomasulo.pr2_count);
-  end
+// always @(posedge clk1)
+//   begin
+//   #10
+//   $display("add_count = %d \t mul_count = %d",tomasulo.add_count,tomasulo.mul_count);
+//   $display("input to RS func %b\t%b\t%b\t%b\t%b",tomasulo.pr2_rs1b,tomasulo.pr2_rs2b,tomasulo.pr2_rs1,tomasulo.pr2_rs2,tomasulo.pr2_rob_ind);
+//   $display("input to RS func %b\t%b\t%b\t%b\t%b",tomasulo.pr2_func,clk1,clk2,tomasulo.pr2_rd,tomasulo.pr2_count);
+//   end
 
 
 Rstation_append rs(tomasulo.pr2_rs1b,tomasulo.pr2_rs2b,tomasulo.pr2_rs1,tomasulo.pr2_rs2,tomasulo.pr2_rob_ind,tomasulo.pr2_func,clk1,clk2,tomasulo.pr2_rd,tomasulo.pr2_count);
