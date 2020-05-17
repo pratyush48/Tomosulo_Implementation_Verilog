@@ -6,12 +6,13 @@ input [2:0]rob_ind;
 input clk1,exec_b;
 integer count_as;
 integer count_md;
-wire out1;
+reg[15:0] out1;
 always @(clk1)
 begin
     if (exec_b == 1)
     begin
-        count = 0;
+        count_as = 0;
+        count_md = 0;
         case(func)
             4'b0000:
             begin

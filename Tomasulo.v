@@ -14,8 +14,9 @@ module tomasulo(pc,clk1,clk2);
   reg[2:0] pr2_rob_ind;
   //These are stage3 pr
   reg pr3_addexec,pr3_mulexec;
-  reg [3:0] pr3_rs1data,pr3_rs2data,pr3_func,pr3_rob_ind,pr3_rd;
-
+  reg [7:0] pr3_rs1data,pr3_rs2data;
+  reg [3:0] pr3_func,pr3_rd;
+  reg [2:0] pr3_rob_ind;
   // reg [1:0] mul_count,bch_count;
   integer add_count,mul_count,bch_count;
   reg [2:0] head_p,tail_p;

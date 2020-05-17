@@ -7,7 +7,8 @@ input[3:0] rs1,rs2,func,rd;
 input [2:0] rob_ind;
 // input [7:0] addr;
 input clk1,clk2;
-integer temp,temp2,exec_b;
+integer temp,temp2;
+reg exec_b;
 // output [15:0] out;
 
 //RS coulmns: func,rob_rs1,rs1,rob_rs2,rs2,rob,busy
@@ -92,6 +93,6 @@ always @(posedge clk2)
   //   $display("Columns of mul_rs = %b",tomasulo.mul_array[temp][0]);
 
   end
-  exec ex(pr3_rs1data,pr3_rs2data,pr3_func,pr3_rob_ind,clk1,pr3_rd,exec_b);
+  exec ex(tomasulo.pr3_rs1data,tomasulo.pr3_rs2data,tomasulo.pr3_func,tomasulo.pr3_rob_ind,clk1,tomasulo.pr3_rd,exec_b);
 
 endmodule
