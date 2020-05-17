@@ -17,8 +17,8 @@ initial begin
   clk1 = 0; clk2 = 0; pc = 0;
   repeat(6)
     begin
-      #5 clk1 = 1; #5 clk1 = 0;
-      #5 clk2 = 1; #5 clk2 = 0;
+      #50 clk1 = 1; #50 clk1 = 0;
+      #50 clk2 = 1; #50 clk2 = 0;
     end
 end
 

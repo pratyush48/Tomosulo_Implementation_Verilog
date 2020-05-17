@@ -90,5 +90,7 @@ begin
         rob_ind = tomasulo.tail_p;
     end
 end
+
 Rstation_append rs(rs1_b,rs2_b,rs1,rs2,rob_ind,func,clk1,clk2,rd,count);
+
 endmodule

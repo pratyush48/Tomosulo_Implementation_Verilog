@@ -7,6 +7,7 @@ input[3:0] rs1,rs2,func,rd;
 input [2:0] rob_ind;
 // input [7:0] addr;
 input clk1,clk2;
+integer temp;
 // output [15:0] out;
 
 //RS coulmns: func,rob_rs1,rs1,rob_rs2,rs2,rob
@@ -46,4 +47,13 @@ always @(posedge clk2)
         end
     end
   end
+always @(posedge clk2)
+  begin
+  // checking the first column of RS
+  for(temp = 0;temp < 3;temp++)
+    $display("Columns of add_rs = %b",tomasulo.add_array[temp][0]);
+  for(temp = 0;temp < 3;temp++)
+    $display("Columns of mul_rs = %b",tomasulo.mul_array[temp][0]);
+  end
+
 endmodule

@@ -26,19 +26,19 @@ end
 
 instruction_set k1(pc,clk1,inst);
 
-always @(pc)
-  begin
-  #10;
-  func = inst[15:12];
-  rs1 = inst[11:8];
-  rs2 = inst[7:4];
-  rd = inst[3:0];
-  $display("values of pc = %b",pc);
-  $display("values of func = %b",func);
-  $display("values of rs1 = %b",rs1);
-  $display("values of rs2 = %b",rs2);
-  $display("values of rd = %b",rd);
-end
+// always @(pc)
+//   begin
+//   #10;
+//   func = inst[15:12];
+//   rs1 = inst[11:8];
+//   rs2 = inst[7:4];
+//   rd = inst[3:0];
+//   $display("values of pc = %b",pc);
+//   $display("values of func = %b",func);
+//   $display("values of rs1 = %b",rs1);
+//   $display("values of rs2 = %b",rs2);
+//   $display("values of rd = %b",rd);
+// end
 
 issue is1(rs1, rs2, rd, func,clk1, clk2);
 
