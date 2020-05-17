@@ -5,11 +5,11 @@ reg[3:0] pc;
 reg clk1,clk2;
 integer  k;
 
- tomasulo tomas(
-  .pc(pc),
-  .clk1(clk1),
-  .clk2(clk2)
-  );
+tomasulo tomas(
+.pc(pc),
+.clk1(clk1),
+.clk2(clk2)
+);
 
 initial begin
   $dumpfile("tomasulo_tb.vcd");
@@ -17,8 +17,8 @@ initial begin
   clk1 = 0; clk2 = 0; pc = 0;
   repeat(6)
     begin
-      #50 clk1 = 1; #50 clk1 = 0;
-      #50 clk2 = 1; #50 clk2 = 0;
+      #5 clk1 = 1; #5 clk1 = 0;
+      #5 clk2 = 1; #5 clk2 = 0;
     end
 end
 
@@ -26,9 +26,11 @@ end
 initial begin
   for(k = 0;k < 16; k++)
       tomas.regbank[k][0] = k;
+  for(k = 0;k < 8;k++)
+      tomas.ROB[k][1] = 8;
 end
 
-always @(posedge clk1)
+always @(posedge clk2)
     pc += 4'b1;
 // initial
 //   repeat(6)

@@ -12,7 +12,7 @@ always @(posedge clk1)
 begin
     index = rs1;
     count = 0;
-    if(tomasulo.regbank[index][1] < 16'b1000)
+    if(tomasulo.regbank[rs1][1] < 16'b1000)
     begin
         rs1_b = 0;
         //rs1 = tomasulo.regbank[index][1];
@@ -88,8 +88,20 @@ begin
         tomasulo.ROB[tomasulo.tail_p][1] <= rd;
         tomasulo.tail_p <= tomasulo.tail_p + 1;
         rob_ind = tomasulo.tail_p;
+        if((func == 4'b0000) || (func == 4'b0001))
+            tomasulo.add_count += 1;
+        if((func == 4'b0010) || (func == 4'b0011))
+            tomasulo.mul_count += 1;
     end
 end
+
+always @(posedge clk1)
+  begin
+  #10
+  $display("add_count = %d \t mul_count = %d",tomasulo.add_count,tomasulo.mul_count);
+  $display("input to RS func %b\t%b\t%b\t%b\t%b\t%b\t%b\t%b",rs1_b,rs2_b,func,rs1,rs2,rob_ind,rd,count);
+  end
+
 
 Rstation_append rs(rs1_b,rs2_b,rs1,rs2,rob_ind,func,clk1,clk2,rd,count);
 

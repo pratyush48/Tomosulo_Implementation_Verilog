@@ -5,8 +5,8 @@ module tomasulo(pc,clk1,clk2);
 
   wire [15:0] inst; //This is for getting instruction from ins set
   reg [3:0] rs1,rs2,func,rd;
-  reg [1:0] mul_count,bch_count;
-  integer add_count;
+  // reg [1:0] mul_count,bch_count;
+  integer add_count,mul_count,bch_count;
   reg [2:0] head_p,tail_p;
   reg [3:0] add_array[0:2][0:5]; //RS add and sub
   reg [3:0] mul_array[0:2][0:5]; //RS mul_array
@@ -26,19 +26,29 @@ end
 
 instruction_set k1(pc,clk1,inst);
 
-// always @(pc)
-//   begin
-//   #10;
-//   func = inst[15:12];
-//   rs1 = inst[11:8];
-//   rs2 = inst[7:4];
-//   rd = inst[3:0];
-//   $display("values of pc = %b",pc);
-//   $display("values of func = %b",func);
-//   $display("values of rs1 = %b",rs1);
-//   $display("values of rs2 = %b",rs2);
-//   $display("values of rd = %b",rd);
-// end
+always @(inst)
+  begin
+  func = inst[15:12];
+  rs1 = inst[11:8];
+  rs2 = inst[7:4];
+  rd = inst[3:0];
+  $display("values of pc = %b",pc);
+  $display("values of func = %b",func);
+  $display("values of rs1 = %b",rs1);
+  $display("values of rs2 = %b",rs2);
+  $display("values of rd = %b",rd);
+end
+
+// assign func = inst[15:12];
+// assign rs1 = inst[11:8];
+// assign rs2 = inst[7:4];
+// assign rd = inst[3:0];
+// // $display("values of pc = %b",pc);
+// // $display("values of func = %b",func);
+// // $display("values of rs1 = %b",rs1);
+// // $display("values of rs2 = %b",rs2);
+// // $display("values of rd = %b",rd);
+
 
 issue is1(rs1, rs2, rd, func,clk1, clk2);
 
