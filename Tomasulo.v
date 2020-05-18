@@ -1,3 +1,18 @@
+//Instructions that are defined
+
+// add = 0000
+// sub = 0001
+// mul = 0010
+// div = 0011
+// load = 0100
+// store = 0101
+// beq = 0110
+// bneq = 0111
+//Ins format = func,rs1,rs2,rd
+//for branches, imm[3:0] = rd
+//for ld,store, func,main_addr,rd
+
+
 module tomasulo(pc,clk1,clk2);
 
   input[3:0] pc;
@@ -59,28 +74,3 @@ end
 issue is1(pr1_rs1, pr1_rs2, pr1_rd, pr1_func,clk1, clk2);
 
 endmodule
-
-//
-// module pipeline(out,rs1,rs2,rd,func,addr,clk1,clk2);
-//
-//       input [4:0] rs1,rs2,rd,func;
-//       input [7:0] addr;
-//       input clk1,clk2;
-//       output [15:0] out;
-//
-//       reg [15:0]
-
-
-//Instructions that are defined
-
-// add = 0000
-// sub = 0001
-// mul = 0010
-// div = 0011
-// load = 0100
-// store = 0101
-// beq = 0110
-// bneq = 0111
-//Ins format = func,rs1,rs2,rd
-//for branches, imm[3:0] = rd
-//for ld,store, func,main_addr,rd

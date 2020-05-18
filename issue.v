@@ -9,17 +9,17 @@ output reg [15:0] Zout;
 // reg rs1_b,rs2_b;
 always @(posedge clk1)
 begin
-    $display("Issue stage : ");
     tomasulo.pr2_count = 0;
-
+    $display("Issue stage : ");
+    $display("rs1 = %b,rs2 = %b,func = %b",rs1,rs2,func);
     if(tomasulo.regbank[rs1][1] < 16'b1000)
-        tomasulo.pr2_rs1b <= 0;
+        tomasulo.pr2_rs1b = 0;
     else
-        tomasulo.pr2_rs1b <= 1;
+        tomasulo.pr2_rs1b = 1;
     if(tomasulo.regbank[rs2][1] < 16'b1000)
-        tomasulo.pr2_rs2b <= 0;
+        tomasulo.pr2_rs2b = 0;
     else
-        tomasulo.pr2_rs2b <= 1;
+        tomasulo.pr2_rs2b = 1;
 
     if (tomasulo.tail_p - tomasulo.head_p == 7)
     begin
@@ -76,10 +76,11 @@ begin
 
     if (tomasulo.pr2_count == 1)
     begin
-        tomasulo.ROB[tomasulo.tail_p][0] <= func;
-        tomasulo.ROB[tomasulo.tail_p][1] <= rd;
-        tomasulo.regbank[rd][1] <= tomasulo.tail_p;
-        tomasulo.tail_p <= tomasulo.tail_p + 1;
+    $display("rs1_b = %b,rs2_b = %b,func = %b",tomasulo.pr2_rs1b,tomasulo.pr2_rs2b,func);
+        tomasulo.ROB[tomasulo.tail_p][0] = func;
+        tomasulo.ROB[tomasulo.tail_p][1] = rd;
+        tomasulo.regbank[rd][1] = tomasulo.tail_p;
+        tomasulo.tail_p = tomasulo.tail_p + 1;
         tomasulo.pr2_rob_ind = tomasulo.tail_p;
         if((func == 4'b0000) || (func == 4'b0001))
             tomasulo.add_count += 1;
@@ -87,15 +88,15 @@ begin
             tomasulo.mul_count += 1;
     end
     if(tomasulo.pr2_rs1b == 0)
-      tomasulo.pr2_rs1 <= tomasulo.regbank[rs1][1];
+      tomasulo.pr2_rs1 = tomasulo.regbank[rs1][1];
     else
-      tomasulo.pr2_rs1 <= rs1;
+      tomasulo.pr2_rs1 = rs1;
     if(tomasulo.pr2_rs2b == 0)
-      tomasulo.pr2_rs2 <= tomasulo.regbank[rs2][1];
+      tomasulo.pr2_rs2 = tomasulo.regbank[rs2][1];
     else
-      tomasulo.pr2_rs2 <= rs2   ;
-    tomasulo.pr2_func <= func;
-    tomasulo.pr2_rd <= rd;
+      tomasulo.pr2_rs2 = rs2   ;
+    tomasulo.pr2_func = func;
+    tomasulo.pr2_rd = rd;
 
     $display("rs1b,rs2b,rs1,rs2,rob_ind,func,clk1,clk2,rd,count");
     $display("%b\t%b\t%b\t%b\t%b",tomasulo.pr2_rs1b,tomasulo.pr2_rs2b,tomasulo.pr2_rs1,tomasulo.pr2_rs2,tomasulo.pr2_rob_ind);
