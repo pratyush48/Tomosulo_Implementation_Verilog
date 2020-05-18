@@ -18,35 +18,43 @@ begin
         case(func)
             4'b0000:
             begin
-                out1 <= rs1_data+rs2_data;
-                count_as <= 1;
-                tomasulo.pr3_addexec <= 0;
+                out1 = rs1_data+rs2_data;
+                count_as = 1;
+                tomasulo.pr3_addexec = 0;
                 tomasulo.ROB[rob_ind][2] =  out1;
                 tomasulo.regbank[rd][1] = 8;
+                tomasulo.regbank[rd][0] = out1;
+                tomasulo.add_array[rs_index][8] = 0;
             end
             4'b0001:
             begin
-                out1 <= #20 rs1_data - rs2_data;
-                count_as <= #20 1;
-                tomasulo.pr3_addexec <= #20 0;
-                tomasulo.ROB[rob_ind][2] = #20 out1;
-                tomasulo.regbank[rd][1] = #20 8;
+                out1 = rs1_data - rs2_data;
+                count_as = 1;
+                tomasulo.pr3_addexec = 0;
+                tomasulo.ROB[rob_ind][2] = out1;
+                tomasulo.regbank[rd][1] = 8;
+                tomasulo.regbank[rd][0] = out1;
+                tomasulo.add_array[rs_index][8] = 0;
             end
             4'b0010:
             begin
-                out1 <= #40 rs1_data*rs2_data;
-                count_md <= #40 1;
-                tomasulo.pr3_mulexec <= #40 0;
-                tomasulo.ROB[rob_ind][2] = #40 out1;
-                tomasulo.regbank[rd][1] = #40 8;
+                out1 =  rs1_data*rs2_data;
+                count_md =  1;
+                tomasulo.pr3_mulexec = 0;
+                tomasulo.ROB[rob_ind][2] = out1;
+                tomasulo.regbank[rd][1] =  8;
+                tomasulo.regbank[rd][0] = out1;
+                tomasulo.mul_array[rs_index][8] = 0;
             end
                 4'b0011:
             begin
-                out1 <= #60 rs1_data/rs2_data;
-                count_md <= #60 1;
-                tomasulo.pr3_mulexec <= #60 0;
-                tomasulo.ROB[rob_ind][2] <= #60 out1;
-                tomasulo.regbank[rd][1] <= #60 8;
+                out1 = rs1_data/rs2_data;
+                count_md = 1;
+                tomasulo.pr3_mulexec = 0;
+                tomasulo.ROB[rob_ind][2] = out1;
+                tomasulo.regbank[rd][1] = 8;
+                tomasulo.regbank[rd][0] = out1;
+                tomasulo.mul_array[rs_index][8] = 0;
             end
             4'b0100:
             begin
@@ -62,7 +70,7 @@ begin
         endcase
     end
     $display("rs1_data = %b, rs2_data = %b, funct = %b, rob_ind = %b, exec_b = %b,out = %b",rs1_data,rs2_data,func,rob_ind,exec_b,out1);
-    $display("Values of rob and regbank for r3 = %b and %b",tomasulo.ROB[0][2],tomasulo.regbank[3][1]);
+    $display("Values of rob and regbank for r3 = %b and %b",tomasulo.ROB[2][2],tomasulo.regbank[5][0]);
 end
 
 endmodule
