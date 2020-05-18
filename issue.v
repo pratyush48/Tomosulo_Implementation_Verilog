@@ -10,6 +10,7 @@ integer index;
 // reg rs1_b,rs2_b;
 always @(posedge clk1)
 begin
+    $display("Issue stage : ");
     index = rs1;
     tomasulo.pr2_count = 0;
 

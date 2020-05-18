@@ -11,18 +11,19 @@ integer temp,temp2,temp3,i;
 reg exec_b;
 // output [15:0] out;
 
-//RS coulmns: func,rob_rs1,rs1,rob_rs2,rs2,rob,busy
+//RS coulmns: func,rob_rs1,rs1,rob_rs2,rs2,rob,rs1b,rs2b
 //if rs1_b is 1 then it is available
 
 always @(posedge clk2)
   begin
       if (count == 1)
       begin
+      $display("Reservation Station: ");
         //This is for add and sub
         if ((func == 4'b0000)||(func == 4'b0001)) begin
             tomasulo.add_array[tomasulo.add_count-1][0] <= func;
-            tomasulo.add_array[tomasulo.add_count-1][2+rs1_b] <= rs1;
-            tomasulo.add_array[tomasulo.add_count-1][4+rs2_b] <= rs2;
+            tomasulo.add_array[tomasulo.add_count-1][1+rs1_b] <= rs1;
+            tomasulo.add_array[tomasulo.add_count-1][3+rs2_b] <= rs2;
             tomasulo.add_array[tomasulo.add_count-1][5] <= rob_ind;
             tomasulo.add_array[tomasulo.add_count-1][6] <= rs1_b;
             tomasulo.add_array[tomasulo.add_count-1][7] <= rs2_b;
@@ -30,8 +31,8 @@ always @(posedge clk2)
         //This is for multiplication and div
         else if ((func == 4'b0010)||(func == 4'b0011)) begin
             tomasulo.mul_array[tomasulo.mul_count-1][0] <= func;
-            tomasulo.mul_array[tomasulo.mul_count-1][2+rs1_b] <= rs1;
-            tomasulo.mul_array[tomasulo.mul_count-1][4+rs2_b] <= rs2;
+            tomasulo.mul_array[tomasulo.mul_count-1][1+rs1_b] <= rs1;
+            tomasulo.mul_array[tomasulo.mul_count-1][3+rs2_b] <= rs2;
             tomasulo.mul_array[tomasulo.mul_count-1][5] <= rob_ind;
             tomasulo.mul_array[tomasulo.mul_count-1][6] <= rs1_b;
             tomasulo.mul_array[tomasulo.mul_count-1][7] <= rs2_b;
@@ -39,8 +40,8 @@ always @(posedge clk2)
         //This is for branch
         else if ((func == 4'b0110)||(func == 4'b0111)) begin
             tomasulo.add_array[tomasulo.add_count-1][0] <= func;
-            tomasulo.add_array[tomasulo.add_count-1][2+rs1_b] <= rs1;
-            tomasulo.add_array[tomasulo.add_count-1][4+rs2_b] <= rs2;
+            tomasulo.add_array[tomasulo.add_count-1][1+rs1_b] <= rs1;
+            tomasulo.add_array[tomasulo.add_count-1][3+rs2_b] <= rs2;
             tomasulo.add_array[tomasulo.add_count-1][5] <= rob_ind;
             tomasulo.add_array[tomasulo.add_count-1][6] <= rs1_b;
             tomasulo.add_array[tomasulo.add_count-1][7] <= rs2_b;
@@ -48,8 +49,8 @@ always @(posedge clk2)
         //This is for load and store
         else if ((func == 4'b0100)||(func == 4'b0101)) begin
             tomasulo.add_array[tomasulo.add_count-1][0] <= func;
-            tomasulo.add_array[tomasulo.add_count-1][2+rs1_b] <= rs1;
-            tomasulo.add_array[tomasulo.add_count-1][4+rs2_b] <= rs2;
+            tomasulo.add_array[tomasulo.add_count-1][1+rs1_b] <= rs1;
+            tomasulo.add_array[tomasulo.add_count-1][3+rs2_b] <= rs2;
             tomasulo.add_array[tomasulo.add_count-1][5] <= rob_ind;
             tomasulo.add_array[tomasulo.add_count-1][6] <= rs1_b;
             tomasulo.add_array[tomasulo.add_count-1][7] <= rs2_b;
@@ -62,13 +63,13 @@ always @(posedge clk2)
   exec_b = 0;
   for(temp2 = 0; temp2<3; temp2++)
   begin
-  // $display("rs1b = %b rs2_b = %b,add_exec = %b",tomasulo.add_array[temp2][6],tomasulo.add_array[temp2][7],tomasulo.pr3_addexec);
+  $display("rs1b = %b rs2_b = %b,add_exec = %b",tomasulo.add_array[temp2][6],tomasulo.add_array[temp2][7],tomasulo.pr3_addexec);
     if((tomasulo.add_array[temp2][6] == 3'b1) && (tomasulo.add_array[temp2][7] == 3'b1) && (tomasulo.pr3_addexec == 0) )
     begin
-      tomasulo.pr3_rs1data <= tomasulo.regbank[tomasulo.add_array[temp2][3]][0];
-      tomasulo.pr3_rs2data <= tomasulo.regbank[tomasulo.add_array[temp2][5]][0];
-      tomasulo.pr3_func <=  func;
-      tomasulo.pr3_rob_ind <= rob_ind;
+      tomasulo.pr3_rs1data <= tomasulo.regbank[tomasulo.add_array[temp2][2]][0];
+      tomasulo.pr3_rs2data <= tomasulo.regbank[tomasulo.add_array[temp2][4]][0];
+      tomasulo.pr3_func <=  tomasulo.add_array[temp2][0];
+      tomasulo.pr3_rob_ind <= tomasulo.add_array[temp2][5];
       tomasulo.pr3_rd = rd;
       exec_b <= 1;
       tomasulo.pr3_addexec += 1;
@@ -76,14 +77,14 @@ always @(posedge clk2)
   end
   for(temp3 = 0; temp3 < 3; temp3++)
   begin
-  // $display("rs1b = %b rs2_b = %b,mul_exec = %b",tomasulo.mul_array[temp3][6],tomasulo.mul_array[temp3][7],tomasulo.pr3_mulexec);
-    //$display("reg_value = %b",tomasulo.regbank[tomasulo.add_array[temp3][3]][0]);
+  $display("rs1b = %b rs2_b = %b,mul_exec = %b",tomasulo.mul_array[temp3][6],tomasulo.mul_array[temp3][7],tomasulo.pr3_mulexec);
+    // $display("reg_value = %b",tomasulo.regbank[tomasulo.add_array[temp3][2]][0]);
     if((tomasulo.mul_array[temp3][6] == 3'b1) && (tomasulo.mul_array[temp3][7] == 3'b1) && (tomasulo.pr3_mulexec == 0))
     begin
-      tomasulo.pr3_rs1data <= tomasulo.regbank[tomasulo.add_array[temp3][3]][0];
-      tomasulo.pr3_rs2data <= tomasulo.regbank[tomasulo.add_array[temp3][5]][0];
-      tomasulo.pr3_func <=  func;
-      tomasulo.pr3_rob_ind = rob_ind;
+      tomasulo.pr3_rs1data <= tomasulo.regbank[tomasulo.mul_array[temp3][2]][0];
+      tomasulo.pr3_rs2data <= tomasulo.regbank[tomasulo.mul_array[temp3][4]][0];
+      tomasulo.pr3_func <=  tomasulo.mul_array[temp3][0];
+      tomasulo.pr3_rob_ind = tomasulo.mul_array[temp3][5];
       tomasulo.pr3_rd <= rd;
       exec_b <= 1;
       tomasulo.pr3_mulexec += 1;

@@ -9,6 +9,7 @@ integer count_md;
 reg[15:0] out1;
 always @(posedge clk1)
 begin
+    $display("\nExecution stage : \n");
     if (exec_b == 1)
     begin
         count_as = 0;
@@ -19,17 +20,17 @@ begin
                 out1 <= #20 rs1_data+rs2_data;
                 count_as <= 1;
             end
-            4'b0001: 
+            4'b0001:
             begin
                 out1 <= #20 rs1_data+rs2_data;
                 count_as <= 1;
             end
-            4'b0010: 
+            4'b0010:
             begin
                 out1 <= #40 rs1_data+rs2_data;
                 count_md <= 1;
             end
-                4'b0011: 
+                4'b0011:
             begin
                 out1 <= #60 rs1_data+rs2_data;
                 count_md <= 1;
@@ -42,12 +43,13 @@ begin
             4'b0101:
             begin
                 //tomasulo.memory[rs1_data+rs2_data] <= tomasulo.regbank[rd][0];
-                //count <= 1;  
+                //count <= 1;
             end
-            //4'b0110: out = 
+            //4'b0110: out =
         endcase
         tomasulo.ROB[rob_ind][2] = out1;
         tomasulo.regbank[rd][1] = 8;
     end
+    $display("rs1_data = %b, rs2_data = %b, funct = %b, rob_ind = %b, exec_b = %b,out = %b",rs1_data,rs2_data,func,rob_ind,exec_b,out1);
 end
 endmodule

@@ -33,6 +33,7 @@ instruction_set k1(pc,clk1,inst);
 
 always @(inst)
   begin
+  // $display("In fetch stage:");
   pr1_func = inst[15:12];
   pr1_rs1 = inst[11:8];
   pr1_rs2 = inst[7:4];
