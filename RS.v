@@ -15,7 +15,7 @@ reg exec_b;
 //RS coulmns: func,rob_rs1,rs1,rob_rs2,rs2,rob,rs1b,rs2b,busy
 //if rs1_b is 1 then it is available
 
-always @(posedge clk2)
+always @(posedge clk1)
   begin
       for(temp4 = 2; temp4 >= 0; temp4--)
       begin
@@ -80,7 +80,7 @@ always @(posedge clk2)
       end
   end
 
-always @(posedge clk2)
+always @(posedge clk1)
   begin
   exec_b <= 0;
     for(temp2 = 0; temp2<3; temp2++)
@@ -88,6 +88,7 @@ always @(posedge clk2)
     // $display("rs1b = %b rs2_b = %b,add_exec = %b",tomasulo.add_array[temp2][6],tomasulo.add_array[temp2][7],tomasulo.pr3_addexec);
       if((tomasulo.add_array[temp2][6] == 3'b1) && (tomasulo.add_array[temp2][7] == 3'b1) && (tomasulo.pr3_addexec == 0) )
       begin
+        tomasulo.pr3_rsindex <= temp2;
         tomasulo.pr3_rs1data <= tomasulo.regbank[tomasulo.add_array[temp2][2]][0];
         tomasulo.pr3_rs2data <= tomasulo.regbank[tomasulo.add_array[temp2][4]][0];
         tomasulo.pr3_func <=  tomasulo.add_array[temp2][0];
@@ -101,8 +102,9 @@ always @(posedge clk2)
     begin
     // $display("rs1b = %b rs2_b = %b,mul_exec = %b",tomasulo.mul_array[temp3][6],tomasulo.mul_array[temp3][7],tomasulo.pr3_mulexec);
       // $display("reg_value = %b",tomasulo.regbank[tomasulo.add_array[temp3][2]][0]);
-      if((tomasulo.mul_array[temp3][6] == 3'b1) && (tomasulo.mul_array[temp3][7] == 3'b1) && (tomasulo.pr3_mulexec == 0))
+      if((tomasulo.mul_array[temp3][6] == 3'b1) && (tomasulo.mul_array[temp3][7] == 3'b1) && (tomasulo.pr3_mulexec == 0) && (exec_b == 0))
       begin
+        tomasulo.pr3_rsindex <= temp3;
         tomasulo.pr3_rs1data <= tomasulo.regbank[tomasulo.mul_array[temp3][2]][0];
         tomasulo.pr3_rs2data <= tomasulo.regbank[tomasulo.mul_array[temp3][4]][0];
         tomasulo.pr3_func <=  tomasulo.mul_array[temp3][0];
@@ -122,7 +124,7 @@ always @(posedge clk2)
 
   end
 
-  exec ex(tomasulo.pr3_rs1data,tomasulo.pr3_rs2data,tomasulo.pr3_func,tomasulo.pr3_rob_ind,clk1,tomasulo.pr3_rd,exec_b);
+exec ex(tomasulo.pr3_rsindex,tomasulo.pr3_rs1data,tomasulo.pr3_rs2data,tomasulo.pr3_func,tomasulo.pr3_rob_ind,clk1,clk2,tomasulo.pr3_rd,exec_b);
 // always@(posedge clk2)
 // begin
 // for(i = 0;i < 16;i++)

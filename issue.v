@@ -7,7 +7,7 @@ output reg [15:0] Zout;
 // reg count;
 // reg [2:0] tomasulo.pr2_rob_ind;
 // reg rs1_b,rs2_b;
-always @(posedge clk1)
+always @(posedge clk2)
 begin
     tomasulo.pr2_count = 0;
     $display("Issue stage : ");
@@ -80,8 +80,8 @@ begin
         tomasulo.ROB[tomasulo.tail_p][0] = func;
         tomasulo.ROB[tomasulo.tail_p][1] = rd;
         tomasulo.regbank[rd][1] = tomasulo.tail_p;
-        tomasulo.tail_p = tomasulo.tail_p + 1;
         tomasulo.pr2_rob_ind = tomasulo.tail_p;
+        tomasulo.tail_p = tomasulo.tail_p + 1;
         if((func == 4'b0000) || (func == 4'b0001))
             tomasulo.add_count += 1;
         if((func == 4'b0010) || (func == 4'b0011))
