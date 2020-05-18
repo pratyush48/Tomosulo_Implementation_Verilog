@@ -66,6 +66,7 @@ begin
                 //tomasulo.memory[rs1_data+rs2_data] <= tomasulo.regbank[rd][0];
                 //count <= 1;
             end
+
             //4'b0110: out =
         endcase
     end
