@@ -98,9 +98,9 @@ begin
     tomasulo.pr2_func = func;
     tomasulo.pr2_rd = rd;
 
-    $display("rs1b,rs2b,rs1,rs2,rob_ind,func,clk1,clk2,rd,count");
-    $display("%b\t%b\t%b\t%b\t%b",tomasulo.pr2_rs1b,tomasulo.pr2_rs2b,tomasulo.pr2_rs1,tomasulo.pr2_rs2,tomasulo.pr2_rob_ind);
-    $display("%b\t%b\t%b\t%b\t%b",tomasulo.pr2_func,clk1,clk2,tomasulo.pr2_rd,tomasulo.pr2_count);
+    // $display("rs1b,rs2b,rs1,rs2,rob_ind,func,clk1,clk2,rd,count");
+    $display("rs1(%b),rs2b(%b),rs1(%b),rs2(%b),rob_ind(%b)",tomasulo.pr2_rs1b,tomasulo.pr2_rs2b,tomasulo.pr2_rs1,tomasulo.pr2_rs2,tomasulo.pr2_rob_ind);
+    $display("func(%b),rd(%b),count(%b)",tomasulo.pr2_func,tomasulo.pr2_rd,tomasulo.pr2_count);
 end
 
 Rstation_append rs(tomasulo.pr2_rs1b,tomasulo.pr2_rs2b,tomasulo.pr2_rs1,tomasulo.pr2_rs2,tomasulo.pr2_rob_ind,tomasulo.pr2_func,clk1,clk2,tomasulo.pr2_rd,tomasulo.pr2_count);

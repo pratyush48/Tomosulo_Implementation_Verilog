@@ -10,7 +10,6 @@ reg[15:0] out1;
 always @(posedge clk2)
 begin
     $display("\nExecution stage : \n");
-    $display("exec: rob_ind = %b, rd = %b",rob_ind,rd);
     if (exec_b == 1)
     begin
         count_as = 0;
@@ -109,7 +108,6 @@ begin
         end
     end
     $display("rs1_data = %b, rs2_data = %b, funct = %b, rob_ind = %b, exec_b = %b,out = %b",rs1_data,rs2_data,func,rob_ind,exec_b,out1);
-    $display("Values of rob and regbank for r3 = %b and %b",tomasulo.ROB[2][2],tomasulo.regbank[5][0]);
 end
 
 endmodule

@@ -17,7 +17,7 @@ reg exec_b;
 
 always @(posedge clk1)
   begin
-      $display("Reservation Station: ");
+      // $display("Reservation Station: ");
       for(temp4 = 2; temp4 >= 0; temp4--)
       begin
         if((func == 4'b0000)||(func == 4'b0001)) begin

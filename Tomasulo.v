@@ -48,16 +48,12 @@ instruction_set k1(pc,clk1,inst);
 
 always @(inst)
   begin
-  // $display("In fetch stage:");
+  $display("In fetch stage:");
   pr1_func = inst[15:12];
   pr1_rs1 = inst[11:8];
   pr1_rs2 = inst[7:4];
   pr1_rd = inst[3:0];
-  // $display("values of pc = %b",pc);
-  // $display("values of func = %b",pr1_func);
-  // $display("values of rs1 = %b",pr1_rs1);
-  // $display("values of rs2 = %b",pr1_rs2);
-  // $display("values of rd = %b",pr1_rd);
+  $display("values of pc = %b,values of func = %b,values of rs1 = %b,values of rs2 = %b,values of rd = %b",pc,pr1_func,pr1_rs1,pr1_rs2,pr1_rd);
 end
 
 // assign func = inst[15:12];
