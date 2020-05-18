@@ -10,7 +10,7 @@
 // bneq = 0111
 //Ins format = func,rs1,rs2,rd
 //for branches, imm[3:0] = rd
-//for ld,store, func,main_addr,rd
+//for ld,store, func,rs1+ s2 - base address,rd
 
 
 module tomasulo(pc,clk1,clk2);
@@ -32,7 +32,8 @@ module tomasulo(pc,clk1,clk2);
   reg [7:0] pr3_rs1data,pr3_rs2data;
   reg [3:0] pr3_func,pr3_rd;
   reg [2:0] pr3_rob_ind,pr3_rsindex;
-  // reg [1:0] mul_count,bch_count;
+
+
   integer add_count,mul_count,bch_count;
   reg [2:0] head_p,tail_p;
   reg [3:0] add_array[0:2][0:8]; //RS add and sub
@@ -55,17 +56,6 @@ always @(inst)
   pr1_rd = inst[3:0];
   $display("values of pc = %b,values of func = %b,values of rs1 = %b,values of rs2 = %b,values of rd = %b",pc,pr1_func,pr1_rs1,pr1_rs2,pr1_rd);
 end
-
-// assign func = inst[15:12];
-// assign rs1 = inst[11:8];
-// assign rs2 = inst[7:4];
-// assign rd = inst[3:0];
-// // $display("values of pc = %b",pc);
-// // $display("values of func = %b",func);
-// // $display("values of rs1 = %b",rs1);
-// // $display("values of rs2 = %b",rs2);
-// // $display("values of rd = %b",rd);
-
 
 issue is1(pr1_rs1, pr1_rs2, pr1_rd, pr1_func,clk1, clk2);
 

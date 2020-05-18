@@ -1,5 +1,5 @@
 module issue (rs1, rs2, rd, func,clk1, clk2);
-//Initialized the registers 
+//Initialized the registers
 input [3:0] rs1, rs2, rd, func;
 wire [3:0] rs1_data,rs2_data;
 input clk1, clk2;
@@ -20,7 +20,7 @@ begin
         tomasulo.pr2_rs2b = 0;
     else
         tomasulo.pr2_rs2b = 1;
-//Check condition if ROB is full or not
+    //Check condition if ROB is full or not
     if (tomasulo.tail_p - tomasulo.head_p == 7)
     begin
         if (tomasulo.tail_p == 7)
@@ -87,6 +87,7 @@ begin
         if((func == 4'b0010) || (func == 4'b0011))
             tomasulo.mul_count += 1;
     end
+    //Updating the stage 2 pipeline registers
     if(tomasulo.pr2_rs1b == 0)
       tomasulo.pr2_rs1 = tomasulo.regbank[rs1][1];
     else
@@ -98,7 +99,6 @@ begin
     tomasulo.pr2_func = func;
     tomasulo.pr2_rd = rd;
 
-    // $display("rs1b,rs2b,rs1,rs2,rob_ind,func,clk1,clk2,rd,count");
     $display("rs1(%b),rs2b(%b),rs1(%b),rs2(%b),rob_ind(%b)",tomasulo.pr2_rs1b,tomasulo.pr2_rs2b,tomasulo.pr2_rs1,tomasulo.pr2_rs2,tomasulo.pr2_rob_ind);
     $display("func(%b),rd(%b),count(%b)",tomasulo.pr2_func,tomasulo.pr2_rd,tomasulo.pr2_count);
 end

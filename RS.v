@@ -12,12 +12,12 @@ integer add_index,mul_index;
 reg exec_b;
 // output [15:0] out;
 
-//RS coulmns: func,rob_rs1,rs1,rob_rs2,rs2,rob,rs1b,rs2b,busy
+//RS coulmns: func,rob_rs1,rs1,rob_rs2,rs2,rob,rs1b,rs2b,valid entry
 //if rs1_b is 1 then it is available
 
 always @(posedge clk1)
   begin
-      // $display("Reservation Station: ");
+      // To check which entry is free
       for(temp4 = 2; temp4 >= 0; temp4--)
       begin
         if((func == 4'b0000)||(func == 4'b0001)) begin
@@ -115,20 +115,8 @@ always @(posedge clk1)
         tomasulo.pr3_mulexec += 1;
       end
     end
-  // checking the first column of RS
-  // #100
-  // $display("rs1d = %b,rs2d = %b,func = %b,exec_b = %b",tomasulo.pr3_rs1data,tomasulo.pr3_rs2data,tomasulo.pr3_func,exec_b);
-  // for(temp = 0;temp < 2;temp++)
-  //   $display("rs1b = %b rs2_b = %b,add_exec = %b",tomasulo.mul_array[temp][6],tomasulo.mul_array[temp][7],tomasulo.pr3_mulexec);
-  // for(temp = 0;temp < 2;temp++)
-  //   $display("rs1b = %b rs2_b = %b,add_exec = %b",tomasulo.add_array[temp][6],tomasulo.add_array[temp][7],tomasulo.pr3_addexec);
-
   end
 
 exec ex(tomasulo.pr3_rsindex,tomasulo.pr3_rs1data,tomasulo.pr3_rs2data,tomasulo.pr3_func,tomasulo.pr3_rob_ind,clk1,clk2,tomasulo.pr3_rd,exec_b);
-// always@(posedge clk2)
-// begin
-// for(i = 0;i < 16;i++)
-//     $display("rob_val = %b",tomasulo.regbank[i][1]);
-// end
+
 endmodule
