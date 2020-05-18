@@ -85,7 +85,7 @@ always @(posedge clk2)
   exec_b <= 0;
     for(temp2 = 0; temp2<3; temp2++)
     begin
-    $display("rs1b = %b rs2_b = %b,add_exec = %b",tomasulo.add_array[temp2][6],tomasulo.add_array[temp2][7],tomasulo.pr3_addexec);
+    // $display("rs1b = %b rs2_b = %b,add_exec = %b",tomasulo.add_array[temp2][6],tomasulo.add_array[temp2][7],tomasulo.pr3_addexec);
       if((tomasulo.add_array[temp2][6] == 3'b1) && (tomasulo.add_array[temp2][7] == 3'b1) && (tomasulo.pr3_addexec == 0) )
       begin
         tomasulo.pr3_rs1data <= tomasulo.regbank[tomasulo.add_array[temp2][2]][0];
@@ -99,7 +99,7 @@ always @(posedge clk2)
     end
     for(temp3 = 0; temp3 < 3; temp3++)
     begin
-    $display("rs1b = %b rs2_b = %b,mul_exec = %b",tomasulo.mul_array[temp3][6],tomasulo.mul_array[temp3][7],tomasulo.pr3_mulexec);
+    // $display("rs1b = %b rs2_b = %b,mul_exec = %b",tomasulo.mul_array[temp3][6],tomasulo.mul_array[temp3][7],tomasulo.pr3_mulexec);
       // $display("reg_value = %b",tomasulo.regbank[tomasulo.add_array[temp3][2]][0]);
       if((tomasulo.mul_array[temp3][6] == 3'b1) && (tomasulo.mul_array[temp3][7] == 3'b1) && (tomasulo.pr3_mulexec == 0))
       begin

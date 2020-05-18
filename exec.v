@@ -54,6 +54,6 @@ begin
         tomasulo.ROB[rob_ind][2] = out1;
         tomasulo.regbank[rd][1] = 8;
     end
-    $display("rs1_data = %b, rs2_data = %b, funct = %b, rob_ind = %b, exec_b = %b,out = %b",rs1_data,rs2_data,func,rob_ind,exec_b,out1);
+    // $display("rs1_data = %b, rs2_data = %b, funct = %b, rob_ind = %b, exec_b = %b,out = %b",rs1_data,rs2_data,func,rob_ind,exec_b,out1);
 end
 endmodule
