@@ -91,6 +91,7 @@ begin
         begin
             if(tomasulo.mul_array[temp][6] == 0)
                 begin
+                $display("value of mul RS: %b and %b and %b and %b",tomasulo.mul_array[temp][1],tomasulo.mul_array[temp][3],tomasulo.ROB[tomasulo.mul_array[temp][1]][1],rd);
                     if(tomasulo.ROB[tomasulo.mul_array[temp][1]][1] == rd)
                         begin
                             tomasulo.mul_array[temp][2] = rd;
@@ -99,6 +100,7 @@ begin
                 end
             if(tomasulo.mul_array[temp][7] == 0)
                 begin
+                $display("value of mul RS: %b and %b and %b and %b",tomasulo.mul_array[temp][1],tomasulo.mul_array[temp][3],tomasulo.ROB[tomasulo.mul_array[temp][3]][1],rd);
                     if(tomasulo.ROB[tomasulo.mul_array[temp][3]][1] == rd)
                         begin
                             tomasulo.mul_array[temp][4] = rd;
