@@ -1,5 +1,5 @@
 module issue (rs1, rs2, rd, func,clk1, clk2);
-
+//Initialized the registers 
 input [3:0] rs1, rs2, rd, func;
 wire [3:0] rs1_data,rs2_data;
 input clk1, clk2;
@@ -10,8 +10,8 @@ output reg [15:0] Zout;
 always @(posedge clk2)
 begin
     tomasulo.pr2_count = 0;
-    $display("Issue stage : ");
-    $display("rs1 = %b,rs2 = %b,func = %b",rs1,rs2,func);
+    $display("\nIssue stage :\n ");
+    // $display("rs1 = %b,rs2 = %b,func = %b",rs1,rs2,func);
     if(tomasulo.regbank[rs1][1] < 16'b1000)
         tomasulo.pr2_rs1b = 0;
     else
@@ -20,7 +20,7 @@ begin
         tomasulo.pr2_rs2b = 0;
     else
         tomasulo.pr2_rs2b = 1;
-
+//Check condition if ROB is full or not
     if (tomasulo.tail_p - tomasulo.head_p == 7)
     begin
         if (tomasulo.tail_p == 7)
@@ -76,7 +76,7 @@ begin
 
     if (tomasulo.pr2_count == 1)
     begin
-    $display("rs1_b = %b,rs2_b = %b,func = %b",tomasulo.pr2_rs1b,tomasulo.pr2_rs2b,func);
+    // $display("rs1_b = %b,rs2_b = %b,func = %b",tomasulo.pr2_rs1b,tomasulo.pr2_rs2b,func);
         tomasulo.ROB[tomasulo.tail_p][0] = func;
         tomasulo.ROB[tomasulo.tail_p][1] = rd;
         tomasulo.regbank[rd][1] = tomasulo.tail_p;
