@@ -5,7 +5,7 @@ input [3:0]func,rd;
 input [2:0]rob_ind,rs_index;
 input clk1,clk2,exec_b;
 integer count_as;
-integer count_md;
+integer count_md, temp;
 reg[15:0] out1;
 always @(posedge clk2)
 begin
@@ -69,6 +69,44 @@ begin
 
             //4'b0110: out =
         endcase
+        for(temp = 0; temp <3 ;temp ++)
+        begin
+            if(tomasulo.add_array[temp][6] == 0)
+                begin
+                    if(tomasulo.ROB[tomasulo.add_array[temp][1]][1] == rd)
+                        begin
+                            tomasulo.add_array[temp][2] = rd;
+                            tomasulo.add_array[temp][6] = 1;
+                        end
+                end
+            if(tomasulo.add_array[temp][7] == 0)
+                begin
+                    if(tomasulo.ROB[tomasulo.add_array[temp][3]][1] == rd)
+                        begin
+                            tomasulo.add_array[temp][4] = rd;
+                            tomasulo.add_array[temp][7] = 1;
+                        end
+                end
+        end
+        for(temp = 0; temp <3 ;temp ++)
+        begin
+            if(tomasulo.mul_array[temp][6] == 0)
+                begin
+                    if(tomasulo.ROB[tomasulo.mul_array[temp][1]][1] == rd)
+                        begin
+                            tomasulo.mul_array[temp][2] = rd;
+                            tomasulo.mul_array[temp][6] = 1;
+                        end
+                end
+            if(tomasulo.mul_array[temp][7] == 0)
+                begin
+                    if(tomasulo.ROB[tomasulo.mul_array[temp][3]][1] == rd)
+                        begin
+                            tomasulo.mul_array[temp][4] = rd;
+                            tomasulo.mul_array[temp][7] = 1;
+                        end
+                end
+        end
     end
     $display("rs1_data = %b, rs2_data = %b, funct = %b, rob_ind = %b, exec_b = %b,out = %b",rs1_data,rs2_data,func,rob_ind,exec_b,out1);
     $display("Values of rob and regbank for r3 = %b and %b",tomasulo.ROB[2][2],tomasulo.regbank[5][0]);
