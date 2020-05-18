@@ -19,21 +19,25 @@ begin
             begin
                 out1 <= #20 rs1_data+rs2_data;
                 count_as <= 1;
+                tomasulo.pr3_addexec <= #20 0;
             end
             4'b0001:
             begin
                 out1 <= #20 rs1_data+rs2_data;
                 count_as <= 1;
+                tomasulo.pr3_addexec <= #20 0;
             end
             4'b0010:
             begin
                 out1 <= #40 rs1_data+rs2_data;
                 count_md <= 1;
+                tomasulo.pr3_mulexec <= #40 0;
             end
                 4'b0011:
             begin
                 out1 <= #60 rs1_data+rs2_data;
                 count_md <= 1;
+                tomasulo.pr3_mulexec <= #60 0;
             end
             4'b0100:
             begin
