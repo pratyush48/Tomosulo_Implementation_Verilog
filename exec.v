@@ -17,43 +17,48 @@ begin
         case(func)
             4'b0000:
             begin
-                out1 = rs1_data+rs2_data;
-                count_as = 1;
-                tomasulo.pr3_addexec = 0;
+                out1 = #20 rs1_data+rs2_data;
+                count_as =  1;
+                // tomasulo.pr3_addexec = 0;
                 tomasulo.ROB[rob_ind][2] =  out1;
                 tomasulo.regbank[rd][1] = 8;
                 tomasulo.regbank[rd][0] = out1;
                 tomasulo.add_array[rs_index][8] = 0;
+                tomasulo.pr3_addexec = 0;
             end
             4'b0001:
             begin
-                out1 = rs1_data - rs2_data;
-                count_as = 1;
-                tomasulo.pr3_addexec = 0;
+                out1 = #20 rs1_data - rs2_data;
+                count_as =  1;
+                // tomasulo.pr3_addexec = 0;
                 tomasulo.ROB[rob_ind][2] = out1;
                 tomasulo.regbank[rd][1] = 8;
                 tomasulo.regbank[rd][0] = out1;
                 tomasulo.add_array[rs_index][8] = 0;
+                tomasulo.pr3_addexec = 0;
             end
             4'b0010:
             begin
-                out1 =  rs1_data*rs2_data;
+                out1 = #20 rs1_data*rs2_data;
                 count_md =  1;
-                tomasulo.pr3_mulexec = 0;
+                // tomasulo.pr3_mulexec = 0;
                 tomasulo.ROB[rob_ind][2] = out1;
                 tomasulo.regbank[rd][1] =  8;
                 tomasulo.regbank[rd][0] = out1;
                 tomasulo.mul_array[rs_index][8] = 0;
+                tomasulo.pr3_mulexec = 0;
+
             end
                 4'b0011:
             begin
-                out1 = rs1_data/rs2_data;
+                out1 = #20 rs1_data/rs2_data;
                 count_md = 1;
-                tomasulo.pr3_mulexec = 0;
+                // tomasulo.pr3_mulexec = 0;
                 tomasulo.ROB[rob_ind][2] = out1;
                 tomasulo.regbank[rd][1] = 8;
                 tomasulo.regbank[rd][0] = out1;
                 tomasulo.mul_array[rs_index][8] = 0;
+                tomasulo.pr3_mulexec = 0;
             end
             4'b0100:
             begin
