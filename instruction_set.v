@@ -10,6 +10,8 @@ integer num;
 //These are the instructions that we use for matrix multiplication.
 
 initial begin
+    //mul r3 r1 r2
+    //add r5 r3 r4
     tomasulo.memory[0] = 16'b0010000100100011;
     tomasulo.memory[1] = 16'b0000001101000101;
     tomasulo.memory[2] = 16'b0000001001100111;
