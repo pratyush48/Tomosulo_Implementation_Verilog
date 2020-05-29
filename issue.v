@@ -12,14 +12,6 @@ begin
     tomasulo.pr2_count = 0;
     $display("\nIssue stage :\n ");
     // $display("rs1 = %b,rs2 = %b,func = %b",rs1,rs2,func);
-    if(tomasulo.regbank[rs1][1] < 16'b1000)
-        tomasulo.pr2_rs1b = 0;
-    else
-        tomasulo.pr2_rs1b = 1;
-    if(tomasulo.regbank[rs2][1] < 16'b1000)
-        tomasulo.pr2_rs2b = 0;
-    else
-        tomasulo.pr2_rs2b = 1;
     //Check condition if ROB is full or not
     if (tomasulo.tail_p - tomasulo.head_p == 7)
     begin
@@ -102,10 +94,10 @@ begin
     tomasulo.pr2_func = func;
     tomasulo.pr2_rd = rd;
 
-    $display("rs1(%b),rs2b(%b),rs1(%b),rs2(%b),rob_ind(%b)",tomasulo.pr2_rs1b,tomasulo.pr2_rs2b,tomasulo.pr2_rs1,tomasulo.pr2_rs2,tomasulo.pr2_rob_ind);
+    // $display("rs1(%b),rs2(%b),rob_ind(%b)",tomasulo.pr2_rs1,tomasulo.pr2_rs2,tomasulo.pr2_rob_ind);
     $display("func(%b),rd(%b),count(%b)",tomasulo.pr2_func,tomasulo.pr2_rd,tomasulo.pr2_count);
 end
 
-Rstation_append rs(tomasulo.pr2_rs1b,tomasulo.pr2_rs2b,tomasulo.pr2_rs1,tomasulo.pr2_rs2,tomasulo.pr2_rob_ind,tomasulo.pr2_func,clk1,clk2,tomasulo.pr2_rd,tomasulo.pr2_count);
+Rstation_append rs(tomasulo.pr2_rs1,tomasulo.pr2_rs2,tomasulo.pr2_rob_ind,tomasulo.pr2_func,clk1,clk2,tomasulo.pr2_rd,tomasulo.pr2_count);
 
 endmodule

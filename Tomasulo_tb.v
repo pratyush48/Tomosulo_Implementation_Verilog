@@ -17,7 +17,7 @@ initial begin
   $dumpvars(0,tomasulo_tb);
   clk1 = 0; clk2 = 0; pc = 0;
   clock_cycle = 0;
-  repeat(8)
+  repeat(15)
     begin
       $display("\nCLOCK CYCLE : %d\n",clock_cycle);
       #5 clk1 = 1; #5 clk1 = 0;

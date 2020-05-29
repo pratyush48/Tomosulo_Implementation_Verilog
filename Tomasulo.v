@@ -23,7 +23,7 @@ module tomasulo(pc,clk1,clk2);
 
   //These are stage 1 pr
   reg [3:0] pr1_rs1,pr1_rs2,pr1_func,pr1_rd;
-  reg pr2_rs1b,pr2_rs2b,pr2_count;
+  reg pr2_count;
   //These are stage 2 pr
   reg [3:0] pr2_rs1,pr2_rs2,pr2_func,pr2_rd;
   reg[2:0] pr2_rob_ind;

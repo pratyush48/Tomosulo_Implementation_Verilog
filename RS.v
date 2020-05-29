@@ -1,11 +1,12 @@
 
-module Rstation_append(rs1_b,rs2_b,rs1,rs2,rob_ind,func,clk1,clk2,rd,count);
+module Rstation_append(rs1,rs2,rob_ind,func,clk1,clk2,rd,count);
 
 //These 2 bits are two check if the registers are available or not
-input rs1_b,rs2_b,count;
+input count;
 input[3:0] rs1,rs2,func,rd;
 input [2:0] rob_ind;
 // input [7:0] addr;
+reg rs1_b,rs2_b;
 input clk1,clk2;
 integer temp,temp2,temp3,temp4,temp5;
 integer add_index,mul_index;
@@ -19,6 +20,14 @@ reg exec_b;
 always @(posedge clk1)
   begin
       // $display("Reservation Station: ");
+      if(tomasulo.regbank[rs1][1] < 16'b1000)
+          rs1_b = 0;
+      else
+          rs1_b = 1;
+      if(tomasulo.regbank[rs2][1] < 16'b1000)
+          rs2_b = 0;
+      else
+          rs2_b = 1;
       for(temp4 = 2; temp4 >= 0; temp4--)
       begin
         if((func == 4'b0000)||(func == 4'b0001)) begin
