@@ -12,10 +12,15 @@ integer num;
 initial begin
     //mul r3 r1 r2
     //add r5 r3 r4
+    //add r7 r2 r6
+    //add r10 r8 r9
+    //mul r11 r7 r10
+    //sub r5 r5 r11
     tomasulo.memory[0] = 16'b0010000100100011;
     tomasulo.memory[1] = 16'b0000001101000101;
     tomasulo.memory[2] = 16'b0000001001100111;
     tomasulo.memory[3] = 16'b0000100010011010;
+    tomasulo.memory[4] = 16'b0010011110101011;
     tomasulo.memory[5] = 16'b0001010100110101;
 end
 

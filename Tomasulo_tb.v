@@ -33,9 +33,9 @@ initial begin
   for(k = 0;k < 8;k++)
       tomas.ROB[k][1] = 8;
   for(k = 0;k < 3;k++)
-      tomas.add_array[k][8] = 3'b0;
+      tomas.add_array[k][6] = 3'b0;
   for(k = 0;k < 3;k++)
-      tomas.mul_array[k][8] = 3'b0;
+      tomas.mul_array[k][6] = 3'b0;
   // for(k = 0; k < 3 ;k++)
       // tomas.bch_array[k][8] = 0;
   tomas.add_count = 0;

@@ -87,15 +87,18 @@ begin
         if((func == 4'b0010) || (func == 4'b0011))
             tomasulo.mul_count += 1;
     end
-    //Updating the stage 2 pipeline registers
-    if(tomasulo.pr2_rs1b == 0)
-      tomasulo.pr2_rs1 = tomasulo.regbank[rs1][1];
-    else
-      tomasulo.pr2_rs1 = rs1;
-    if(tomasulo.pr2_rs2b == 0)
-      tomasulo.pr2_rs2 = tomasulo.regbank[rs2][1];
-    else
-      tomasulo.pr2_rs2 = rs2   ;
+//We don't need to do this. This will make it complex
+    // //Updating the stage 2 pipeline registers
+    // if(tomasulo.pr2_rs1b == 0)
+    //   tomasulo.pr2_rs1 = tomasulo.regbank[rs1][1];
+    // else
+    //   tomasulo.pr2_rs1 = rs1;
+    // if(tomasulo.pr2_rs2b == 0)
+    //   tomasulo.pr2_rs2 = tomasulo.regbank[rs2][1];
+    // else
+    //  tomasulo.pr2_rs2 = rs2;
+    tomasulo.pr2_rs1 = rs1;
+    tomasulo.pr2_rs2 = rs2;
     tomasulo.pr2_func = func;
     tomasulo.pr2_rd = rd;
 
