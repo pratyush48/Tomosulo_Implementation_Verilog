@@ -16,8 +16,8 @@ begin
         case(func)
             4'b0000:
             begin
-                out1 = rs1_data+rs2_data;
-                count_as =  1;
+                out1 = #20 rs1_data+rs2_data;
+                count_as = 1;
                 // tomasulo.pr3_addexec = 0;
                 tomasulo.ROB[rob_ind][2] <=  out1;
                 tomasulo.regbank[rd][1] <= 16'b1000;
@@ -28,7 +28,7 @@ begin
             end
             4'b0001:
             begin
-                out1 = rs1_data - rs2_data;
+                out1 = #20 rs1_data - rs2_data;
                 count_as =  1;
                 // tomasulo.pr3_addexec = 0;
                 tomasulo.ROB[rob_ind][2] <= out1;
