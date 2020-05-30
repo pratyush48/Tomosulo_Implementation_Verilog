@@ -52,7 +52,8 @@ initial begin
 end
 
 always @(posedge clk2) begin
-    pc += 4'b1;
+    if(tomas.stall_bit == 0)
+      pc += 4'b1;
     end
 // initial
 //   repeat(6)
