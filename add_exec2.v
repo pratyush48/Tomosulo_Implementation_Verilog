@@ -24,8 +24,7 @@ begin
             tomasulo.add_array[rs_index][6] <= #40 0;
             tomasulo.pr3_exec_b[1] <= #40 0; //Making it free
             tomasulo.pr3_addcount <= #40 tomasulo.pr3_addcount - 1;
-            #42
-            $display("count_as in exec unit 1 =\t\t\t\t %b",count_as);
+            #42;
             end
             4'b0001:
             begin
@@ -38,8 +37,7 @@ begin
                 tomasulo.add_array[rs_index][6] <= #40 0;
                 tomasulo.pr3_exec_b[1] <= #40 0; //Making it free
                 tomasulo.pr3_addcount <= #40 tomasulo.pr3_addcount - 1;
-                #42
-                $display("count_as in exec unit 1 =\t\t\t\t %b",count_as);
+                #42;
             end
         endcase
 

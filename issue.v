@@ -17,11 +17,11 @@ begin
     begin
         if (tomasulo.tail_p == 7)
         begin
-            if(tomasulo.add_count < 3)
+            if(tomasulo.add_count < 2)
                 tomasulo.pr2_count   =  1;
-            else if(tomasulo.mul_count < 3)
+            else if(tomasulo.mul_count < 2)
                 tomasulo.pr2_count = 1;
-            else if(tomasulo.bch_count < 3)
+            else if(tomasulo.bch_count < 2)
                 tomasulo.pr2_count = 1;
             // else
                 //stall
@@ -31,22 +31,22 @@ begin
     begin
         if (tomasulo.tail_p == 7)
         begin
-            if(tomasulo.add_count < 3)
+            if(tomasulo.add_count < 2)
                 tomasulo.pr2_count = 1;
-            else if(tomasulo.mul_count < 3)
+            else if(tomasulo.mul_count < 2)
                 tomasulo.pr2_count = 1;
-            else if(tomasulo.bch_count < 3)
+            else if(tomasulo.bch_count < 2)
                 tomasulo.pr2_count = 1;
             // else
                 //stall
         end
         else
         begin
-            if(tomasulo.add_count < 3)
+            if(tomasulo.add_count < 2)
                 tomasulo.pr2_count = 1;
-            else if(tomasulo.mul_count < 3)
+            else if(tomasulo.mul_count < 2)
                 tomasulo.pr2_count = 1;
-            else if(tomasulo.bch_count < 3)
+            else if(tomasulo.bch_count < 2)
                 tomasulo.pr2_count = 1;
             // else
                 //stall
@@ -54,11 +54,11 @@ begin
     end
     else
     begin
-        if(tomasulo.add_count < 3)
+        if(tomasulo.add_count < 2)
             tomasulo.pr2_count = 1;
-        else if(tomasulo.mul_count < 3)
+        else if(tomasulo.mul_count < 2)
             tomasulo.pr2_count = 1;
-        else if(tomasulo.bch_count < 3)
+        else if(tomasulo.bch_count < 2)
         begin
             tomasulo.pr2_count = 1;
         end
@@ -73,7 +73,7 @@ begin
         tomasulo.ROB[tomasulo.tail_p][1] = rd;
         tomasulo.regbank[rd][1] = tomasulo.tail_p;
         tomasulo.pr2_rob_ind = tomasulo.tail_p;
-        tomasulo.tail_p = tomasulo.tail_p + 1;
+        tomasulo.tail_p += 1;
         if((func == 4'b0000) || (func == 4'b0001))
             tomasulo.add_count += 1;
         if((func == 4'b0010) || (func == 4'b0011))
@@ -86,7 +86,7 @@ begin
     tomasulo.pr2_rd <= rd;
 
     // $display("rs1(%b),rs2(%b),rob_ind(%b)",tomasulo.pr2_rs1,tomasulo.pr2_rs2,tomasulo.pr2_rob_ind);
-    $display("func(%b),rd(%b),count(%b)",tomasulo.pr2_func,tomasulo.pr2_rd,tomasulo.pr2_count);
+    $display("func(%b),rd(%b),count(%b),add_count = %d",tomasulo.pr2_func,tomasulo.pr2_rd,tomasulo.pr2_count,tomasulo.add_count);
 end
 
 Rstation_append rs(tomasulo.pr2_rs1,tomasulo.pr2_rs2,tomasulo.pr2_rob_ind,tomasulo.pr2_func,clk1,clk2,tomasulo.pr2_rd,tomasulo.pr2_count);

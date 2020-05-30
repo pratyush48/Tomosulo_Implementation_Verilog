@@ -22,8 +22,7 @@ begin
                 tomasulo.mul_array[rs_index][6] <= #60 0;
                 tomasulo.pr3_exec_b[2] <= #60 0; //Making the mul exec free
                 tomasulo.pr3_mulcount <= #60 tomasulo.pr3_mulcount - 1;
-                #62 //Delay for displaying the data
-                $display("count_md =\t\t\t\t %b",count_md);
+                #62;  //Delay for displaying the data
             end
             4'b0011:
             begin
@@ -35,8 +34,7 @@ begin
                 tomasulo.mul_array[rs_index][6] <= #80 0;
                 tomasulo.pr3_exec_b[2] <= #80 0; //Making the mul exec free
                 tomasulo.pr3_mulcount <= #80 tomasulo.pr3_mulcount - 1;
-                #82
-                $display("count_md =\t\t\t\t %b",count_md);
+                #82;
             end
         endcase
 

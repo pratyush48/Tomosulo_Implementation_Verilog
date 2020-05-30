@@ -42,8 +42,8 @@ initial begin
   // for(k = 0; k < 3 ;k++)
       // tomas.bch_array[k][8] = 0;
   tomas.add_count = 0;
-  tomas.mul_count = 2'b0;
-  tomas.bch_count = 2'b0;
+  tomas.mul_count = 0;
+  tomas.bch_count = 0;
   tomas.head_p = 3'b0;
   tomas.tail_p = 3'b0;
   tomas.pr3_exec_b = 4'b0000;
