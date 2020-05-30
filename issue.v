@@ -17,9 +17,9 @@ begin
     begin
         if (tomasulo.tail_p == 7)
         begin
-            if(tomasulo.add_count < 2)
+            if(tomasulo.add_count < 2 && (func == 4'b0000 | func == 4'b 0001))
                 tomasulo.pr2_count   =  1;
-            else if(tomasulo.mul_count < 2)
+            else if(tomasulo.mul_count < 2 && (func == 4'b0010 | func == 4'b 0011))
                 tomasulo.pr2_count = 1;
             else if(tomasulo.bch_count < 2)
                 tomasulo.pr2_count = 1;
@@ -31,9 +31,9 @@ begin
     begin
         if (tomasulo.tail_p == 7)
         begin
-            if(tomasulo.add_count < 2)
+            if(tomasulo.add_count < 2 && (func == 4'b0000 | func == 4'b 0001))
                 tomasulo.pr2_count = 1;
-            else if(tomasulo.mul_count < 2)
+            else if(tomasulo.mul_count < 2 && (func == 4'b0010 | func == 4'b 0011))
                 tomasulo.pr2_count = 1;
             else if(tomasulo.bch_count < 2)
                 tomasulo.pr2_count = 1;
@@ -42,9 +42,9 @@ begin
         end
         else
         begin
-            if(tomasulo.add_count < 2)
+            if(tomasulo.add_count < 2 && (func == 4'b0000 | func == 4'b 0001))
                 tomasulo.pr2_count = 1;
-            else if(tomasulo.mul_count < 2)
+            else if(tomasulo.mul_count < 2 && (func == 4'b0010 | func == 4'b 0011))
                 tomasulo.pr2_count = 1;
             else if(tomasulo.bch_count < 2)
                 tomasulo.pr2_count = 1;
@@ -54,9 +54,9 @@ begin
     end
     else
     begin
-        if(tomasulo.add_count < 2)
+        if(tomasulo.add_count < 2 && (func == 4'b0000 | func == 4'b 0001))
             tomasulo.pr2_count = 1;
-        else if(tomasulo.mul_count < 2)
+        else if(tomasulo.mul_count < 2 && (func == 4'b0010 | func == 4'b 0011))
             tomasulo.pr2_count = 1;
         else if(tomasulo.bch_count < 2)
         begin
