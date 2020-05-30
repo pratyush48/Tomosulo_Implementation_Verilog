@@ -24,7 +24,7 @@ begin
                 tomasulo.regbank[rd][0] <= out1;
                 tomasulo.mul_array[rs_index][6] <= 0;
                 tomasulo.pr3_exec_b[2] = 0; //Making the mul exec free
-                tomasulo.mul_count -= 1;
+                tomasulo.pr3_mulcount -= 1;
             end
                 4'b0011:
             begin
@@ -36,7 +36,7 @@ begin
                 tomasulo.regbank[rd][0] = out1;
                 tomasulo.mul_array[rs_index][6] = 0;
                 tomasulo.pr3_exec_b[2] = 0; //Making the mul exec free
-                tomasulo.mul_count -= 1;
+                tomasulo.pr3_mulcount -= 1;
             end
         endcase
 

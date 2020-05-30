@@ -27,7 +27,8 @@ module tomasulo(pc,clk1,clk2);
   //These are stage 2 pr
   reg [3:0] pr2_rs1,pr2_rs2,pr2_func,pr2_rd;
   reg[2:0] pr2_rob_ind;
-  //These are stage3 pr
+
+  //These are stage3 that is RS stage
   //1st bit and 2nd bit are for add-sub exec unit
   //3rd and 4th are for mul-div exec unit
   reg [3:0] pr3_exec_b;
@@ -36,7 +37,8 @@ module tomasulo(pc,clk1,clk2);
   reg [2:0] pr3_rob_ind[0:3],pr3_rsindex[0:3];
   integer pr3_addcount,pr3_mulcount;
 
-  integer add_count,mul_count,bch_count;
+  //This is for issue stage
+  integer add_count,mul_count,bch_count; //These are needed in issue stage
   reg [2:0] head_p,tail_p;
   reg [3:0] add_array[0:2][0:6]; //RS add and sub
   reg [3:0] mul_array[0:2][0:6]; //RS mul_array

@@ -24,7 +24,7 @@ begin
                 tomasulo.regbank[rd][0] <= out1;
                 tomasulo.add_array[rs_index][6] <= 0;
                 tomasulo.pr3_exec_b[1] = 0; //Making it free
-                tomasulo.add_count -= 1;
+                tomasulo.pr3_addcount -= 1;
             end
             4'b0001:
             begin
@@ -36,7 +36,7 @@ begin
                 tomasulo.regbank[rd][0] <= out1;
                 tomasulo.add_array[rs_index][6] <= 0;
                 tomasulo.pr3_exec_b[1] = 0; //Making it free
-                tomasulo.add_count -= 1;
+                tomasulo.pr3_addcount -= 1;
             end
         endcase
 
