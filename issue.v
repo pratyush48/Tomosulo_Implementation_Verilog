@@ -7,7 +7,7 @@ output reg [15:0] Zout;
 // reg count;
 // reg [2:0] tomasulo.pr2_rob_ind;
 // reg rs1_b,rs2_b;
-always @(posedge clk2)
+always @(posedge clk1)
 begin
     tomasulo.pr2_count = 0;
     $display("\nIssue stage :\n ");

@@ -7,7 +7,7 @@ input clk1,clk2,ex_b;
 integer count_as;
 integer temp, temp1;
 reg[15:0] out1;
-always @(posedge clk2)
+always @(posedge clk1)
 begin
     if (ex_b == 1)
     begin
@@ -24,6 +24,8 @@ begin
             tomasulo.add_array[rs_index][6] <= #40 0;
             tomasulo.pr3_exec_b[1] <= #40 0; //Making it free
             tomasulo.pr3_addcount <= #40 tomasulo.pr3_addcount - 1;
+            #42
+            $display("count_as in exec unit 1 =\t\t\t\t %b",count_as);
             end
             4'b0001:
             begin
@@ -36,6 +38,8 @@ begin
                 tomasulo.add_array[rs_index][6] <= #40 0;
                 tomasulo.pr3_exec_b[1] <= #40 0; //Making it free
                 tomasulo.pr3_addcount <= #40 tomasulo.pr3_addcount - 1;
+                #42
+                $display("count_as in exec unit 1 =\t\t\t\t %b",count_as);
             end
         endcase
 
@@ -67,7 +71,7 @@ begin
         end
         if(count_as == 1)
         begin
-            $display("\nExec unit 1 : \n");
+            $display("\nExec unit 2 : \n");
             $display("rs1_data = %b, rs2_data = %b, funct = %b, rob_ind = %b,out = %b",rs1_data,rs2_data,func,rob_ind,out1);
         end
         end

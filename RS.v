@@ -14,7 +14,7 @@ integer add_index,mul_index, exec_count;
 //RS coulmns: func,rs1,rs2,rob,rs1b,rs2b,busy,exec_busy
 //if rs1_b is 1 then it is available
 
-always @(posedge clk1)
+always @(posedge clk2)
   begin
       //Checking for the availability of data in registers
       if(tomasulo.regbank[rs1][1] < 16'b1000)
@@ -98,7 +98,7 @@ always @(posedge clk1)
       end
   end
 
-always @(posedge clk1)
+always @(posedge clk2)
   begin
     ex_b = 4'b0000;   //Making all exec units busy
 

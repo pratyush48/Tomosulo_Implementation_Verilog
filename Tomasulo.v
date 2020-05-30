@@ -52,7 +52,7 @@ module tomasulo(pc,clk1,clk2);
 
 instruction_set k1(pc,clk1,inst);
 
-always @(inst)
+always @(posedge clk2)
   begin
   $display("In fetch stage:");
   pr1_func = inst[15:12];

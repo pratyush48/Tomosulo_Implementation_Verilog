@@ -6,7 +6,7 @@ input [2:0]rob_ind,rs_index;
 input clk1,clk2,ex_b;
 integer count_md, temp, temp1;
 reg[15:0] out1;
-always @(posedge clk2)
+always @(posedge clk1)
 begin
     if (ex_b == 1)
     begin
@@ -22,17 +22,21 @@ begin
                 tomasulo.mul_array[rs_index][6] <= #60 0;
                 tomasulo.pr3_exec_b[3] <= #60 0; //Making the mul exec free
                 tomasulo.pr3_mulcount <= #60 tomasulo.pr3_mulcount - 1;
+                #62
+                $display("count_md =\t\t\t\t %b",count_md);
             end
             4'b0011:
             begin
-                out1 <= #60 rs1_data/rs2_data;
-                count_md <=  #60 1;
-                tomasulo.ROB[rob_ind][2] <= #60 out1;
-                tomasulo.regbank[rd][1] <= #60 16'b1000;
-                tomasulo.regbank[rd][0] <= #60 out1;
-                tomasulo.mul_array[rs_index][6] <= #60 0;
-                tomasulo.pr3_exec_b[3] <= #60 0; //Making the mul exec free
+                out1 <= #80 rs1_data/rs2_data;
+                count_md <=  #80 1;
+                tomasulo.ROB[rob_ind][2] <= #80 out1;
+                tomasulo.regbank[rd][1] <= #80 16'b1000;
+                tomasulo.regbank[rd][0] <= #80 out1;
+                tomasulo.mul_array[rs_index][6] <= #80 0;
+                tomasulo.pr3_exec_b[3] <= #80 0; //Making the mul exec free
                 tomasulo.pr3_mulcount <= #80 tomasulo.pr3_mulcount - 1;
+                #82
+                $display("count_md =\t\t\t\t %b",count_md);
             end
         endcase
 
@@ -64,7 +68,7 @@ begin
         end
         if(count_md == 1)
         begin
-            $display("\nExec unit 1 : \n");
+            $display("\nExec unit 4 : \n");
             $display("rs1_data = %b, rs2_data = %b, funct = %b, rob_ind = %b,out = %b",rs1_data,rs2_data,func,rob_ind,out1);
         end
         end
