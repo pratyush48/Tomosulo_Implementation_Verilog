@@ -5,42 +5,47 @@ input [3:0]func,rd;
 input [2:0]rob_ind,rs_index;
 input clk1,clk2,ex_b;
 integer count_as;
-integer count_md, temp, temp1;
+integer  temp, temp1;
 reg[15:0] out1;
+
+// add = 2cyles (40units)
+// sub = 2cyles (40units)
+// mul = 3cyles (60units)
+// add = 4cyles (80units)
+
 always @(posedge clk2)
 begin
     if (ex_b == 1)
     begin
         count_as = 0;
-        count_md = 0;
         case(func)
             4'b0000:
             begin
-                out1 = #20 rs1_data+rs2_data;
-                count_as = 1;
+                out1 <= #40 rs1_data+rs2_data;
+                count_as <= #40 1;
                 // tomasulo.pr3_addexec = 0;
-                tomasulo.ROB[rob_ind][2] <=  out1;
-                tomasulo.regbank[rd][1] <= 16'b1000;
-                tomasulo.regbank[rd][0] <= out1;
-                tomasulo.add_array[rs_index][6] <= 0;
-                tomasulo.pr3_exec_b[0] = 0; //Making it free
-                tomasulo.pr3_addcount -= 1;
+                tomasulo.ROB[rob_ind][2] <= #40 out1;
+                tomasulo.regbank[rd][1] <= #40 16'b1000;
+                tomasulo.regbank[rd][0] <= #40 out1;
+                tomasulo.add_array[rs_index][6] <= #40 0;
+                tomasulo.pr3_exec_b[0] <= #40 0; //Making it free
+                tomasulo.pr3_addcount <= #40 tomasulo.pr3_addcount - 1;
             end
             4'b0001:
             begin
-                out1 = #20 rs1_data - rs2_data;
-                count_as =  1;
+                out1 <= #40 rs1_data - rs2_data;
+                count_as <= #40 1;
                 // tomasulo.pr3_addexec = 0;
-                tomasulo.ROB[rob_ind][2] <= out1;
-                tomasulo.regbank[rd][1] <= 16'b1000;
-                tomasulo.regbank[rd][0] <= out1;
-                tomasulo.add_array[rs_index][6] <= 0;
-                tomasulo.pr3_exec_b[0] = 0; //Making it free
-                tomasulo.pr3_addcount -= 1;
+                tomasulo.ROB[rob_ind][2] <= #40 out1;
+                tomasulo.regbank[rd][1] <= #40 16'b1000;
+                tomasulo.regbank[rd][0] <= #40 out1;
+                tomasulo.add_array[rs_index][6] <= #40 0;
+                tomasulo.pr3_exec_b[0] <= #40 0; //Making it free
+                tomasulo.pr3_addcount <= #40 tomasulo.pr3_addcount - 1;
             end
         endcase
 
-        for(temp = 0; temp <3 ;temp ++)
+        for(temp = 0; temp <3 && (count_as == 1);temp ++)
         begin
             if(tomasulo.add_array[temp][4] == 0)
                 begin
@@ -53,7 +58,7 @@ begin
                         tomasulo.add_array[temp][5] = 1;
                 end
         end
-        for(temp = 0; temp <3 ;temp ++)
+        for(temp = 0; temp <3 && (count_as == 1) ;temp ++)
         begin
             if(tomasulo.mul_array[temp][4] == 0)
                 begin
@@ -66,8 +71,11 @@ begin
                         tomasulo.mul_array[temp][5] = 1;
                 end
         end
-    $display("\nExec unit 1 : \n");
-    $display("rs1_data = %b, rs2_data = %b, funct = %b, rob_ind = %b,out = %b",rs1_data,rs2_data,func,rob_ind,out1);
+    if(count_as == 1)
+    begin
+        $display("\nExec unit 1 : \n");
+        $display("rs1_data = %b, rs2_data = %b, funct = %b, rob_ind = %b,out = %b",rs1_data,rs2_data,func,rob_ind,out1);
+    end
     end
 end
 

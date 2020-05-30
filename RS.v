@@ -11,7 +11,7 @@ input clk1,clk2;
 integer temp,temp2,temp3,temp4,temp5;
 integer add_index,mul_index, exec_count;
 
-//RS coulmns: func,rs1,rs2,rob,rs1b,rs2b,busy
+//RS coulmns: func,rs1,rs2,rob,rs1b,rs2b,busy,exec_busy
 //if rs1_b is 1 then it is available
 
 always @(posedge clk1)
@@ -106,7 +106,7 @@ always @(posedge clk1)
     for(temp2 = 0; temp2 < 3; temp2++)
     begin
     // $display("rs1b = %b rs2_b = %b,add_exec = %b",tomasulo.add_array[temp2][4],tomasulo.add_array[temp2][5],tomasulo.pr3_addexec);
-      if((tomasulo.add_array[temp2][4] == 3'b1) && (tomasulo.add_array[temp2][5] == 3'b1) && (tomasulo.add_array[temp2][6] == 1) && (tomasulo.pr3_addcount < 2))
+      if((tomasulo.add_array[temp2][4] == 3'b1) && (tomasulo.add_array[temp2][5] == 3'b1) && (tomasulo.add_array[temp2][6] == 1) && (tomasulo.pr3_addcount < 2) && (tomasulo.add_array[temp2][7] == 0))
       begin
         if(tomasulo.pr3_exec_b[0] == 0)
         begin
@@ -116,6 +116,7 @@ always @(posedge clk1)
             tomasulo.pr3_func[0] <=  tomasulo.add_array[temp2][0];
             tomasulo.pr3_rob_ind[0] <= tomasulo.add_array[temp2][3];
             tomasulo.pr3_rd[0] <= tomasulo.ROB[tomasulo.add_array[temp2][3]][1];
+            tomasulo.add_array[temp2][7] <= 1; //To know that the inst is in exec stage
             ex_b[0] <= 1;
             tomasulo.pr3_exec_b[0] <= 1;
             tomasulo.pr3_addcount += 1;
@@ -128,6 +129,7 @@ always @(posedge clk1)
             tomasulo.pr3_func[1] <=  tomasulo.add_array[temp2][0];
             tomasulo.pr3_rob_ind[1] <= tomasulo.add_array[temp2][3];
             tomasulo.pr3_rd[1] <= tomasulo.ROB[tomasulo.add_array[temp2][3]][1];
+            tomasulo.add_array[temp2][7] <= 1; //To know that the instruction is in exec stage
             ex_b[1] <= 1;
             tomasulo.pr3_exec_b[1] <= 1;
             tomasulo.pr3_addcount += 1;
@@ -137,7 +139,7 @@ always @(posedge clk1)
     //For multiplication and division exec units
     for(temp3 = 0; temp3 < 3; temp3++)
     begin
-      if((tomasulo.mul_array[temp3][4] == 3'b1) && (tomasulo.mul_array[temp3][5] == 3'b1) && (tomasulo.mul_array[temp3][6] == 1) && (tomasulo.pr3_mulcount < 2))
+      if((tomasulo.mul_array[temp3][4] == 3'b1) && (tomasulo.mul_array[temp3][5] == 3'b1) && (tomasulo.mul_array[temp3][6] == 1) && (tomasulo.pr3_mulcount < 2) && (tomasulo.mul_array[temp3][7] == 0))
       begin
         if(tomasulo.pr3_exec_b[2] == 0)
           begin
@@ -147,6 +149,7 @@ always @(posedge clk1)
             tomasulo.pr3_func[2] <=  tomasulo.mul_array[temp3][0];
             tomasulo.pr3_rob_ind[2] <= tomasulo.mul_array[temp3][3];
             tomasulo.pr3_rd[2] <= tomasulo.ROB[tomasulo.mul_array[temp3][3]][1];
+            tomasulo.mul_array[temp3][7] <= 1;
             ex_b[2] <= 1;
             tomasulo.pr3_exec_b[2] <= 1;
             tomasulo.pr3_mulcount += 1;
@@ -159,6 +162,7 @@ always @(posedge clk1)
             tomasulo.pr3_func[3] <=  tomasulo.mul_array[temp3][0];
             tomasulo.pr3_rob_ind[3] <= tomasulo.mul_array[temp3][3];
             tomasulo.pr3_rd[3] <= tomasulo.ROB[tomasulo.mul_array[temp3][3]][1];
+            tomasulo.mul_array[temp3][7] <= 1;
             ex_b[3] <= 1;
             tomasulo.pr3_exec_b[3] <= 1;
             tomasulo.pr3_mulcount += 1;

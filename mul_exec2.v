@@ -4,41 +4,39 @@ input [7:0]rs2_data;
 input [3:0]func,rd;
 input [2:0]rob_ind,rs_index;
 input clk1,clk2,ex_b;
-integer count_as;
 integer count_md, temp, temp1;
 reg[15:0] out1;
 always @(posedge clk2)
 begin
     if (ex_b == 1)
     begin
-        count_as = 0;
         count_md = 0;
         case(func)
             4'b0010:
             begin
-                out1 = #40 rs1_data*rs2_data;
-                count_md =  1;
-                tomasulo.ROB[rob_ind][2] <= out1;
-                tomasulo.regbank[rd][1] <= 16'b1000;
-                tomasulo.regbank[rd][0] <= out1;
-                tomasulo.mul_array[rs_index][6] <= 0;
-                tomasulo.pr3_exec_b[3] = 0; //Making the mul exec free
-                tomasulo.pr3_mulcount -= 1;
+                out1 <= #60 rs1_data*rs2_data;
+                count_md <=  #60 1;
+                tomasulo.ROB[rob_ind][2] <= #60 out1;
+                tomasulo.regbank[rd][1] <= #60 16'b1000;
+                tomasulo.regbank[rd][0] <= #60 out1;
+                tomasulo.mul_array[rs_index][6] <= #60 0;
+                tomasulo.pr3_exec_b[3] <= #60 0; //Making the mul exec free
+                tomasulo.pr3_mulcount <= #60 tomasulo.pr3_mulcount - 1;
             end
-                4'b0011:
+            4'b0011:
             begin
-                out1 = #60 rs1_data/rs2_data;
-                count_md = 1;
-                tomasulo.ROB[rob_ind][2] = out1;
-                tomasulo.regbank[rd][1] = 16'b1000;
-                tomasulo.regbank[rd][0] = out1;
-                tomasulo.mul_array[rs_index][6] = 0;
-                tomasulo.pr3_exec_b[3] = 0; //Making the mul exec free
-                tomasulo.pr3_mulcount -= 1;
+                out1 <= #60 rs1_data/rs2_data;
+                count_md <=  #60 1;
+                tomasulo.ROB[rob_ind][2] <= #60 out1;
+                tomasulo.regbank[rd][1] <= #60 16'b1000;
+                tomasulo.regbank[rd][0] <= #60 out1;
+                tomasulo.mul_array[rs_index][6] <= #60 0;
+                tomasulo.pr3_exec_b[3] <= #60 0; //Making the mul exec free
+                tomasulo.pr3_mulcount <= #80 tomasulo.pr3_mulcount - 1;
             end
         endcase
 
-        for(temp = 0; temp <3 ;temp ++)
+        for(temp = 0; temp <3 && (count_md == 1);temp ++)
         begin
             if(tomasulo.add_array[temp][4] == 0)
                 begin
@@ -51,7 +49,7 @@ begin
                         tomasulo.add_array[temp][5] = 1;
                 end
         end
-        for(temp = 0; temp <3 ;temp ++)
+        for(temp = 0; temp <3 && (count_md == 1);temp ++)
         begin
             if(tomasulo.mul_array[temp][4] == 0)
                 begin
@@ -64,9 +62,12 @@ begin
                         tomasulo.mul_array[temp][5] = 1;
                 end
         end
-    $display("\nExecution unit 4 : \n");
-    $display("rs1_data = %b, rs2_data = %b, funct = %b, rob_ind = %b,out = %b",rs1_data,rs2_data,func,rob_ind,out1);
-    end
+        if(count_md == 1)
+        begin
+            $display("\nExec unit 1 : \n");
+            $display("rs1_data = %b, rs2_data = %b, funct = %b, rob_ind = %b,out = %b",rs1_data,rs2_data,func,rob_ind,out1);
+        end
+        end
 end
 
 endmodule
