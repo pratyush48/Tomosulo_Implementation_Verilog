@@ -16,9 +16,9 @@ begin
             begin
                 out1 <= #60 rs1_data*rs2_data;
                 count_md <=  #60 1;
-                tomasulo.ROB[rob_ind][2] <= #60 out1;
+                tomasulo.ROB[rob_ind][2] <= #60 rs1_data*rs2_data;
                 tomasulo.regbank[rd][1] <= #60 16'b1000;
-                tomasulo.regbank[rd][0] <= #60 out1;
+                tomasulo.regbank[rd][0] <= #60 rs1_data*rs2_data;
                 tomasulo.mul_array[rs_index][6] <= #60 0;
                 tomasulo.pr3_exec_b[3] <= #60 0; //Making the mul exec free
                 tomasulo.pr3_mulcount <= #60 tomasulo.pr3_mulcount - 1;
@@ -29,9 +29,9 @@ begin
             begin
                 out1 <= #80 rs1_data/rs2_data;
                 count_md <=  #80 1;
-                tomasulo.ROB[rob_ind][2] <= #80 out1;
+                tomasulo.ROB[rob_ind][2] <= #80 rs1_data/rs2_data;
                 tomasulo.regbank[rd][1] <= #80 16'b1000;
-                tomasulo.regbank[rd][0] <= #80 out1;
+                tomasulo.regbank[rd][0] <= #80 rs1_data/rs2_data;
                 tomasulo.mul_array[rs_index][6] <= #80 0;
                 tomasulo.pr3_exec_b[3] <= #80 0; //Making the mul exec free
                 tomasulo.pr3_mulcount <= #80 tomasulo.pr3_mulcount - 1;

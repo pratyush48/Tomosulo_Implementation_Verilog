@@ -18,9 +18,9 @@ begin
             out1 <= #40 rs1_data+rs2_data;
             count_as <= #40 1;
             // tomasulo.pr3_addexec = 0;
-            tomasulo.ROB[rob_ind][2] <= #40 out1;
+            tomasulo.ROB[rob_ind][2] <= #40 rs1_data + rs2_data;
             tomasulo.regbank[rd][1] <= #40 16'b1000;
-            tomasulo.regbank[rd][0] <= #40 out1;
+            tomasulo.regbank[rd][0] <= #40 rs1_data + rs2_data;
             tomasulo.add_array[rs_index][6] <= #40 0;
             tomasulo.pr3_exec_b[1] <= #40 0; //Making it free
             tomasulo.pr3_addcount <= #40 tomasulo.pr3_addcount - 1;
@@ -32,9 +32,9 @@ begin
                 out1 <= #40 rs1_data - rs2_data;
                 count_as <= #40 1;
                 // tomasulo.pr3_addexec = 0;
-                tomasulo.ROB[rob_ind][2] <= #40 out1;
+                tomasulo.ROB[rob_ind][2] <= #40 rs1_data - rs2_data;
                 tomasulo.regbank[rd][1] <= #40 16'b1000;
-                tomasulo.regbank[rd][0] <= #40 out1;
+                tomasulo.regbank[rd][0] <= #40 rs1_data - rs2_data;
                 tomasulo.add_array[rs_index][6] <= #40 0;
                 tomasulo.pr3_exec_b[1] <= #40 0; //Making it free
                 tomasulo.pr3_addcount <= #40 tomasulo.pr3_addcount - 1;
