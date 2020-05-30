@@ -17,7 +17,7 @@ initial begin
   $dumpvars(0,tomasulo_tb);
   clk1 = 0; clk2 = 0; pc = 0;
   clock_cycle = 0;
-  repeat(15)
+  repeat(12)
     begin
       $display("\nCLOCK CYCLE : %d\n",clock_cycle);
       #5 clk1 = 1; #5 clk1 = 0;
@@ -43,8 +43,9 @@ initial begin
   tomas.bch_count = 2'b0;
   tomas.head_p = 3'b0;
   tomas.tail_p = 3'b0;
-  tomas.pr3_addexec = 0;
-  tomas.pr3_mulexec = 0;
+  tomas.pr3_exec_b = 4'b0000;
+  tomas.pr3_addcount = 0;
+  tomas.pr3_mulcount = 0;
 end
 
 always @(posedge clk2) begin

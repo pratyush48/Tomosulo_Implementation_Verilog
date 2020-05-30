@@ -28,11 +28,13 @@ module tomasulo(pc,clk1,clk2);
   reg [3:0] pr2_rs1,pr2_rs2,pr2_func,pr2_rd;
   reg[2:0] pr2_rob_ind;
   //These are stage3 pr
-  reg pr3_addexec,pr3_mulexec;
-  reg [7:0] pr3_rs1data,pr3_rs2data;
-  reg [3:0] pr3_func,pr3_rd;
-  reg [2:0] pr3_rob_ind,pr3_rsindex;
-
+  //1st bit and 2nd bit are for add-sub exec unit
+  //3rd and 4th are for mul-div exec unit
+  reg [3:0] pr3_exec_b;
+  reg [7:0] pr3_rs1data[0:3],pr3_rs2data[0:3];
+  reg [3:0] pr3_func[0:3],pr3_rd[0:3];
+  reg [2:0] pr3_rob_ind[0:3],pr3_rsindex[0:3];
+  integer pr3_addcount,pr3_mulcount;
 
   integer add_count,mul_count,bch_count;
   reg [2:0] head_p,tail_p;
