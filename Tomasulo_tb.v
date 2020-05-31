@@ -1,7 +1,7 @@
 
 module tomasulo_tb;
 
-reg[3:0] pc;
+reg[4:0] pc;
 reg clk1,clk2;
 integer  k;
 integer clock_cycle;
@@ -16,10 +16,10 @@ initial begin
   $dumpfile("tomasulo_tb.vcd");
   $dumpvars(0,tomasulo_tb);
   clk1 = 0; clk2 = 0; pc = 0;
-  clock_cycle = 0;
-  repeat(15)
+  clock_cycle = 1;
+  repeat(14)
     begin
-      $display("\nCLOCK CYCLE : %d\n",clock_cycle);
+      $display("\n\nCLOCK CYCLE : %d",clock_cycle);
       #5 clk1 = 1; #5 clk1 = 0;
       #5 clk2 = 1; #5 clk2 = 0;
       clock_cycle += 1;
@@ -51,13 +51,9 @@ initial begin
   tomas.pr3_mulcount = 0;
 end
 
-always @(posedge clk2) begin
+always @(posedge clk2)
+begin
       pc += 4'b1;
-    end
-// initial
-//   repeat(6)
-//     begin
-//       #20 pc = pc + 4'b1;
-//     end
+end
 
 endmodule

@@ -22,14 +22,14 @@ begin
             4'b0000:
             begin
                 out1 <= #40 rs1_data + rs2_data;
-                count_as <= #40 1;
-                // tomasulo.pr3_addexec = 0;
+                count_as <= #41 1;
                 tomasulo.ROB[rob_ind][2] <= #40 rs1_data+rs2_data;
                 tomasulo.regbank[rd][1] <= #40 16'b1000;
                 tomasulo.regbank[rd][0] <= #40 rs1_data+rs2_data;
                 tomasulo.add_array[rs_index][6] <= #40 0;
                 tomasulo.pr3_exec_b[0] <= #40 0; //Making it free
                 tomasulo.pr3_addcount <= #40 tomasulo.pr3_addcount - 1;
+                tomasulo.add_count <= #40 tomasulo.add_count - 1; //This is for RS
                 #42;
             end
             4'b0001:
@@ -42,7 +42,8 @@ begin
                 tomasulo.regbank[rd][0] <= #40 rs1_data - rs2_data;
                 tomasulo.add_array[rs_index][6] <= #40 0;
                 tomasulo.pr3_exec_b[0] <= #40 0; //Making it free
-                tomasulo.pr3_addcount <= #40 tomasulo.pr3_addcount - 1;
+                tomasulo.pr3_addcount <= #40 tomasulo.pr3_addcount - 1; //This is for exec
+                tomasulo.add_count <= #40 tomasulo.add_count - 1; //This is for RS
                 #42;
             end
         endcase
@@ -75,8 +76,8 @@ begin
         end
     if(count_as == 1)
     begin
-        $display("\nExec unit 1 : \n");
-        $display("rs1_data = %b, rs2_data = %b, funct = %b, rob_ind = %b,out = %b",rs1_data,rs2_data,func,rob_ind,out1);
+        $display("\nExec unit 1 :");
+        $display("rs1_data = %b, rs2_data = %b, funct = %b, rob_ind = %b,out = %b\n",rs1_data,rs2_data,func,rob_ind,out1);
     end
     end
 end

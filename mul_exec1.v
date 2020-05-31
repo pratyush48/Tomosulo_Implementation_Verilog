@@ -22,18 +22,20 @@ begin
                 tomasulo.mul_array[rs_index][6] <= #60 0;
                 tomasulo.pr3_exec_b[2] <= #60 0; //Making the mul exec free
                 tomasulo.pr3_mulcount <= #60 tomasulo.pr3_mulcount - 1;
+                tomasulo.mul_count <= #60 tomasulo.mul_count - 1;
                 #62;  //Delay for displaying the data
             end
             4'b0011:
             begin
                 out1 <= #80 rs1_data/rs2_data;
-                count_md <=  #80 1;
+                count_md <=  #81 1;
                 tomasulo.ROB[rob_ind][2] <= #80 rs1_data/rs2_data;
                 tomasulo.regbank[rd][1] <= #80 16'b1000;
                 tomasulo.regbank[rd][0] <= #80 rs1_data/rs2_data;
                 tomasulo.mul_array[rs_index][6] <= #80 0;
                 tomasulo.pr3_exec_b[2] <= #80 0; //Making the mul exec free
-                tomasulo.pr3_mulcount <= #80 tomasulo.pr3_mulcount - 1;
+                tomasulo.pr3_mulcount <= #80 tomasulo.pr3_mulcount - 1; //This is for exec
+                tomasulo.mul_count <= #80 tomasulo.mul_count - 1; //This is for RS
                 #82;
             end
         endcase
@@ -67,8 +69,8 @@ begin
         end
         if(count_md == 1)
         begin
-            $display("\nExec unit 3 : \n");
-            $display("rs1_data = %b, rs2_data = %b, funct = %b, rob_ind = %b,out = %b",rs1_data,rs2_data,func,rob_ind,out1);
+            $display("\nExec unit 3 : ");
+            $display("rs1_data = %b, rs2_data = %b, funct = %b, rob_ind = %b,out = %b\n",rs1_data,rs2_data,func,rob_ind,out1);
         end
         end
 end

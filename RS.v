@@ -18,10 +18,7 @@ always @(posedge clk2)
   begin
       //Checking for the availability of data in registers
       if(tomasulo.regbank[rs1][1] < 16'b1000)
-      begin
           rs1_b = 0;
-          // if(func == 4'b0001)
-      end
       else
           rs1_b = 1;
 
@@ -63,6 +60,7 @@ always @(posedge clk2)
             tomasulo.add_array[add_index][4] <= rs1_b;
             tomasulo.add_array[add_index][5] <= rs2_b;
             tomasulo.add_array[add_index][6] <= 1;
+            tomasulo.add_array[add_index][7] <= 0;
         end
         //This is for multiplication and div
         else if ((func == 4'b0010)||(func == 4'b0011))
@@ -74,6 +72,7 @@ always @(posedge clk2)
             tomasulo.mul_array[mul_index][4] <= rs1_b;
             tomasulo.mul_array[mul_index][5] <= rs2_b;
             tomasulo.mul_array[mul_index][6] <= 1;
+            tomasulo.mul_array[mul_index][7] <= 0;
         end
         //This is for branch
         else if ((func == 4'b0110)||(func == 4'b0111))
@@ -170,14 +169,15 @@ always @(posedge clk2)
       end
     end
   //RS coulmns: func,rs1,rs2,rob,rs1b,rs2b,busy
-  $display("Reservation Station: \n");
-  $display("add_count = %d, mul_count = %d, exec_b = %b, pr3_execb = %b",tomasulo.pr3_addcount,tomasulo.pr3_mulcount,ex_b,tomasulo.pr3_exec_b);
-  $display("MULT and DIV RS");
+  #3;
+  $display("Reservation Station: ");
+  // $display("add_count = %d, mul_count = %d, exec_b = %b, pr3_execb = %b",tomasulo.pr3_addcount,tomasulo.pr3_mulcount,ex_b,tomasulo.pr3_exec_b);
+  $display("\nMULT and DIV RS");
   for(temp = 0;temp <= 2;temp++)
-    $display("Funct = %b, rs1_b = %b rs2_b = %b, busybit = %b",tomasulo.mul_array[temp][0],tomasulo.mul_array[temp][4],tomasulo.mul_array[temp][5],tomasulo.mul_array[temp][6]);
-  $display("ADD and SUB RS");
+    $display("Funct = %b, rs1_b = %b rs2_b = %b, busybit = %b, RS_exec = %b",tomasulo.mul_array[temp][0],tomasulo.mul_array[temp][4],tomasulo.mul_array[temp][5],tomasulo.mul_array[temp][6],tomasulo.mul_array[temp][7]);
+  $display("\nADD and SUB RS");
   for(temp = 0;temp <= 2;temp++)
-    $display("Funct = %b, rs1_b = %b rs2_b = %b, busybit = %b",tomasulo.add_array[temp][0],tomasulo.add_array[temp][4],tomasulo.add_array[temp][5],tomasulo.add_array[temp][6]);
+    $display("Funct = %b, rs1_b = %b rs2_b = %b, busybit = %b,  RS_exec = %b",tomasulo.add_array[temp][0],tomasulo.add_array[temp][4],tomasulo.add_array[temp][5],tomasulo.add_array[temp][6],tomasulo.add_array[temp][7]);
 
   end
 

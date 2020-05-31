@@ -15,7 +15,7 @@
 
 module tomasulo(pc,clk1,clk2);
 
-  input[3:0] pc;
+  input[4:0] pc;
   input clk1,clk2;
 
   wire [15:0] inst; //This is for getting instruction from ins set
@@ -54,12 +54,12 @@ instruction_set k1(pc,clk1,inst);
 
 always @(posedge clk2)
   begin
-  $display("In fetch stage:");
+  $display("\nIn fetch stage:");
   pr1_func = inst[15:12];
   pr1_rs1 = inst[11:8];
   pr1_rs2 = inst[7:4];
   pr1_rd = inst[3:0];
-  $display("values of pc = %b,values of func = %b,values of rs1 = %b,values of rs2 = %b,values of rd = %b",pc,pr1_func,pr1_rs1,pr1_rs2,pr1_rd);
+  $display("values of pc = %b,values of func = %b,values of rs1 = %b,values of rs2 = %b,values of rd = %b\n\n",pc,pr1_func,pr1_rs1,pr1_rs2,pr1_rd);
 end
 
 issue is1(pr1_rs1, pr1_rs2, pr1_rd, pr1_func,clk1, clk2);
