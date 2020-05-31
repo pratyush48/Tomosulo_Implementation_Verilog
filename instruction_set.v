@@ -27,11 +27,8 @@ end
 
 always@(posedge clk1)
   begin
-    if(tomasulo.stall_bit == 0)
-    begin
-      num = PC;
-      output_instruction = tomasulo.memory[num];  //Here we are assigning the instruction present in the memory.
-    end
+    num = PC;
+    output_instruction = tomasulo.memory[num];  //Here we are assigning the instruction present in the memory.
   end
 
 

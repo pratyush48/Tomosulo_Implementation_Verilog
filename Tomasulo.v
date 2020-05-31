@@ -56,15 +56,12 @@ instruction_set k1(pc,clk1,inst);
 
 always @(posedge clk2)
   begin
-    if(tomasulo.stall_bit == 0)
-    begin
-      $display("In fetch stage:");
-      pr1_func = inst[15:12];
-      pr1_rs1 = inst[11:8];
-      pr1_rs2 = inst[7:4];
-      pr1_rd = inst[3:0];
-      $display("values of pc = %b,values of func = %b,values of rs1 = %b,values of rs2 = %b,values of rd = %b",pc,pr1_func,pr1_rs1,pr1_rs2,pr1_rd);
-    end
+  $display("In fetch stage:");
+  pr1_func = inst[15:12];
+  pr1_rs1 = inst[11:8];
+  pr1_rs2 = inst[7:4];
+  pr1_rd = inst[3:0];
+  $display("values of pc = %b,values of func = %b,values of rs1 = %b,values of rs2 = %b,values of rd = %b",pc,pr1_func,pr1_rs1,pr1_rs2,pr1_rd);
 end
 
 issue is1(pr1_rs1, pr1_rs2, pr1_rd, pr1_func,clk1, clk2);
