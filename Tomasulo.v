@@ -27,8 +27,6 @@ module tomasulo(pc,clk1,clk2);
   //These are stage 2 pr
   reg [3:0] pr2_rs1,pr2_rs2,pr2_func,pr2_rd;
   reg[2:0] pr2_rob_ind;
-  //Stall bit
-  reg stall_bit;
 
   //These are stage3 that is RS stage
   //1st bit and 2nd bit are for add-sub exec unit

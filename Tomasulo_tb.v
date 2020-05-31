@@ -51,10 +51,9 @@ initial begin
   tomas.pr3_mulcount = 0;
 end
 
-always @(posedge clk2)
-begin
-    pc += 4'b1;
-end
+always @(posedge clk2) begin
+      pc += 4'b1;
+    end
 // initial
 //   repeat(6)
 //     begin
