@@ -71,8 +71,7 @@ begin
         tomasulo.ROB[tomasulo.tail_p][1] = rd;
         tomasulo.regbank[rd][1] = tomasulo.tail_p;
         tomasulo.pr2_rob_ind = tomasulo.tail_p;
-        tomasulo.tail_p += 1;
-        tomasulo.stall_bit = 
+        tomasulo.tail_p += 1; 
         if((func == 4'b0000) || (func == 4'b0001))
             tomasulo.add_count += 1;
         if((func == 4'b0010) || (func == 4'b0011))
